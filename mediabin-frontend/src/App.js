@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
+
 import mediaService from "./services/media"
+import FileBase64 from "react-file-base64"
 
 const App = () => {
   const [textArea, setTextArea] = useState('')
+  const [image, setImage] = useState()
   const [allMedia, setAllMedia] = useState([])
 
   useEffect(() => {
@@ -11,44 +14,79 @@ const App = () => {
       setAllMedia(media)
     }
 
-    fetchMedia()
-  }, [allMedia])
+    fetchMedia().catch(console.error)
+  }, [])
 
-  const handleChange = (event) => {
-    setTextArea(event.target.value);
+  const handleTextChange = (event) => {
+    setTextArea(event.target.value)
   }
 
-  const handleSubmit = (event) => {
+  const handleTextSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const newMedia = mediaService.createMedia({
-        content: textArea
+      const newMedia = await mediaService.createMedia({
+        content: textArea,
+        type: 'text'
       })
+
       setAllMedia(allMedia.concat(newMedia))
-      alert('Media sent')
     } catch {
       alert('Something went wrong')
     }
     setTextArea('')
   }
 
+  const handleFileSubmit = async (event) => {
+    event.preventDefault()
+
+    try {
+      const newImage = await mediaService.createMedia({
+        content: image,
+        type: 'image'
+      })
+
+      setAllMedia(allMedia.concat(newImage))
+      alert('Media sent')
+    } catch {
+      alert('Something went wrong')
+    }
+  }
+
   return (
     <div>
       <h1>Mediabin</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleTextSubmit}>
         <label>
           Media:
           <br />
-          <textarea value={textArea} onChange={handleChange} />
+          <textarea value={textArea} onChange={handleTextChange} />
           <br />
         </label>
         <input type="submit" value="Create new media" />
       </form>
       <br />
 
-      {allMedia.map(media => <div>{media.content}</div>)}
+      <form onSubmit={handleFileSubmit}>
+        <label>
+          Media:
+          <br />
+          <FileBase64 type='file' multiple={false} onDone={({ base64 }) => setImage(base64)} />
+          <br />
+        </label>
+        <input type="submit" value="Upload file" />
+      </form>
+      <br />
+
+      {allMedia.map(media => {
+        return media.type === 'image' ? (
+          <p><img style={{ width: '10%', height: '10%' }} src={media.content} alt={'Unknown'} /></p>
+        ) : (
+          <p>{media.content}</p>
+        )
+      })}
+
     </div>
   )
 }
