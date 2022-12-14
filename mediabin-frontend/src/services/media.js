@@ -7,8 +7,14 @@ const getAll = async () => {
   return response.data
 }
 
+const createMedia = async (newMedia) => {
+  const response = await axios.post(baseUrl, newMedia)
+  return response.data
+}
+
 const exportable = {
   getAll,
+  createMedia
 }
 
 export default exportable

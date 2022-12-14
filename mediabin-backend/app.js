@@ -22,7 +22,7 @@ app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
 
-app.use('/api/notes', mediaRouter)
+app.use('/api/all-media', mediaRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

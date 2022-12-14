@@ -13,7 +13,6 @@ mongoose.connect(url)
 
 const mediaSchema = new mongoose.Schema({
   content: mongoose.Schema.Types.Mixed,
-  important: Boolean
 })
 
 mediaSchema.set('toJSON', {
