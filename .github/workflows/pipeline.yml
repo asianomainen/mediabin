@@ -17,8 +17,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: npm install
+      - name: npm install back end
         working-directory: ./mediabin-backend
+        run: npm install
+      - name: npm install front end
+        working-directory: ./mediabin-frontend
         run: npm install
       - name: lint
         working-directory: ./mediabin-backend
