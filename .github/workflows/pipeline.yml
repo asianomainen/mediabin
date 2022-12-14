@@ -22,7 +22,7 @@ jobs:
         run: npm install
       - name: lint
         working-directory: ./mediabin-backend
-        run: npm run eslint
+        run: npm run lint
       - name: build
         working-directory: ./mediabin-backend
         run: npm run build:ui
