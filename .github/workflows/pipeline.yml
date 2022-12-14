@@ -21,6 +21,8 @@ jobs:
         working-directory: ./mediabin-backend
         run: npm install
       - name: lint
+        working-directory: ./mediabin-backend
         run: npm run eslint
       - name: build
+        working-directory: ./mediabin-backend
         run: npm run build:ui
