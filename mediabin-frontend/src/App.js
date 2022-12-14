@@ -6,6 +6,7 @@ import FileBase64 from "react-file-base64"
 const App = () => {
   const [textArea, setTextArea] = useState('')
   const [image, setImage] = useState()
+  const [file, setFile] = useState()
   const [allMedia, setAllMedia] = useState([])
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const App = () => {
     setTextArea('')
   }
 
-  const handleFileSubmit = async (event) => {
+  const handleImageSubmit = async (event) => {
     event.preventDefault()
 
     try {
@@ -53,13 +54,29 @@ const App = () => {
     }
   }
 
+  const handleFileSubmit = async (event) => {
+    event.preventDefault()
+
+    try {
+      const newFile = await mediaService.createMedia({
+        content: file,
+        type: 'file'
+      })
+
+      setAllMedia(allMedia.concat(newFile))
+      alert('Media sent')
+    } catch {
+      alert('Something went wrong')
+    }
+  }
+
   return (
     <div>
       <h1>Mediabin</h1>
 
       <form onSubmit={handleTextSubmit}>
         <label>
-          Media:
+          Text:
           <br />
           <textarea value={textArea} onChange={handleTextChange} />
           <br />
@@ -68,11 +85,22 @@ const App = () => {
       </form>
       <br />
 
-      <form onSubmit={handleFileSubmit}>
+      <form onSubmit={handleImageSubmit}>
         <label>
-          Media:
+          Image:
           <br />
           <FileBase64 type='file' multiple={false} onDone={({ base64 }) => setImage(base64)} />
+          <br />
+        </label>
+        <input type="submit" value="Upload image" />
+      </form>
+      <br />
+
+      <form onSubmit={handleFileSubmit}>
+        <label>
+          File:
+          <br />
+          <FileBase64 type='file' multiple={false} onDone={({ base64 }) => setFile(base64)} />
           <br />
         </label>
         <input type="submit" value="Upload file" />
@@ -80,11 +108,39 @@ const App = () => {
       <br />
 
       {allMedia.map(media => {
-        return media.type === 'image' ? (
-          <p><img style={{ width: '10%', height: '10%' }} src={media.content} alt={'Unknown'} /></p>
-        ) : (
-          <p>{media.content}</p>
-        )
+        if (media.type === 'image') {
+          return (
+            <p>
+              <img style={{ width: '10%', height: '10%' }} src={media.content} alt={'Unknown'} />
+            </p>
+          )
+        } else if (media.type === 'text') {
+          return (
+            <p>
+              {media.content}
+            </p>)
+        } else {
+          const tmp = media.content.split(",");
+          const prefix = tmp[0];
+          const contentType = prefix.split(/[:;]+/)[1];
+          const byteCharacters = window.atob(tmp[1]);
+
+          const byteNumbers = new Array(byteCharacters.length);
+          for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+          }
+          const byteArray = new Uint8Array(byteNumbers);
+          const blob = new Blob([byteArray], { type: contentType });
+          const blobUrl = URL.createObjectURL(blob);
+
+          return (
+            <p>
+              <a href={blobUrl}>
+                <button>Download a mysterious file</button>
+              </a>
+            </p>
+          )
+        }
       })}
 
     </div>
