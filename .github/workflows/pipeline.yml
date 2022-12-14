@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: '18'
       - name: npm install
+        working-directory: ./mediabin-backend
         run: npm install
       - name: lint
         run: npm run eslint
