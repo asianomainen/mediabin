@@ -24,6 +24,7 @@ app.use(express.static('build'))
 app.use(bodyParser.json({ limit: '5mb' }))
 app.use(express.json())
 
+
 app.use('/api/all-media', mediaRouter)
 
 app.use(middleware.unknownEndpoint)
