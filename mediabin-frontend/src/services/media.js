@@ -8,7 +8,6 @@ const getAll = async () => {
 }
 
 const createMedia = async (newMedia) => {
-  console.log('In services/media', newMedia)
   const response = await axios.post(baseUrl, newMedia)
   return response.data
 }

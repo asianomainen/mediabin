@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react"
-
+import { uploadFile } from 'react-s3';
 import mediaService from "./services/media"
-import FileBase64 from "react-file-base64"
+
+window.Buffer = window.Buffer || require("buffer").Buffer;
+
+const config = {
+  bucketName: process.env.REACT_APP_AWS_BUCKET_NAME,
+  region: process.env.REACT_APP_AWS_REGION,
+  accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+}
 
 const App = () => {
   const [textArea, setTextArea] = useState('')
-  const [image, setImage] = useState()
   const [file, setFile] = useState()
+  const [fileType, setFileType] = useState()
   const [allMedia, setAllMedia] = useState([])
 
   useEffect(() => {
@@ -38,35 +46,25 @@ const App = () => {
     setTextArea('')
   }
 
-  const handleImageSubmit = async (event) => {
-    event.preventDefault()
-
-    try {
-      const newImage = await mediaService.createMedia({
-        content: image,
-        type: 'image'
-      })
-
-      setAllMedia(allMedia.concat(newImage))
-      alert('Media sent')
-    } catch {
-      alert('Something went wrong')
-    }
+  const handleFileInput = (event) => {
+    setFile(event.target.files[0])
+    setFileType(event.target.files[0].type)
   }
 
-  const handleFileSubmit = async (event) => {
+  const handleFileUpload = async (event) => {
     event.preventDefault()
 
     try {
-      const newFile = await mediaService.createMedia({
-        content: file,
-        type: 'file'
+      const uploadedFile = await uploadFile(file, config)
+
+      const newMedia = await mediaService.createMedia({
+        content: uploadedFile.location,
+        type: fileType
       })
 
-      setAllMedia(allMedia.concat(newFile))
-      alert('Media sent')
-    } catch {
-      alert('Something went wrong')
+      setAllMedia(allMedia.concat(newMedia))
+    } catch (e) {
+      console.error(e)
     }
   }
 
@@ -85,22 +83,11 @@ const App = () => {
       </form>
       <br />
 
-      <form onSubmit={handleImageSubmit}>
-        <label>
-          Image:
-          <br />
-          <FileBase64 type='file' multiple={false} onDone={({ base64 }) => setImage(base64)} />
-          <br />
-        </label>
-        <input type="submit" value="Upload image" />
-      </form>
-      <br />
-
-      <form onSubmit={handleFileSubmit}>
+      <form onSubmit={handleFileUpload}>
         <label>
           File:
           <br />
-          <FileBase64 type='file' multiple={false} onDone={({ base64 }) => setFile(base64)} />
+          <input type="file" onChange={handleFileInput} />
           <br />
         </label>
         <input type="submit" value="Upload file" />
@@ -108,7 +95,7 @@ const App = () => {
       <br />
 
       {allMedia.map(media => {
-        if (media.type === 'image') {
+        if (media.type === 'image/jpeg') {
           return (
             <p>
               <img style={{ width: '10%', height: '10%' }} src={media.content} alt={'Unknown'} />
@@ -120,24 +107,9 @@ const App = () => {
               {media.content}
             </p>)
         } else {
-          const tmp = media.content.split(",");
-          const prefix = tmp[0];
-          const contentType = prefix.split(/[:;]+/)[1];
-          const byteCharacters = window.atob(tmp[1]);
-
-          const byteNumbers = new Array(byteCharacters.length);
-          for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-          }
-          const byteArray = new Uint8Array(byteNumbers);
-          const blob = new Blob([byteArray], { type: contentType });
-          const blobUrl = URL.createObjectURL(blob);
-
           return (
             <p>
-              <a href={blobUrl}>
-                <button>Download a mysterious file</button>
-              </a>
+              There will be a file here later.
             </p>
           )
         }
