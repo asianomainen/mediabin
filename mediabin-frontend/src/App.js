@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import mediaService from './services/media'
-import TextUpload from './components/TextUpload'
-import FileUpload from './components/FileUpload'
-import { Form } from 'react-bootstrap'
+import AllMedia from './components/AllMedia'
+import MediaUpload from './components/MediaUpload'
 
 const App = () => {
   const [allMedia, setAllMedia] = useState([])
@@ -24,26 +23,10 @@ const App = () => {
       <h4>Welcome to Mediabin! Are you tired of only being able to paste text in Pastebin? Worry no more! Mediabin is
         here. With Mediabin you are able to share files in addition to text.</h4>
 
-      <Form>
-        <Form.Label>
-          Create new media
-        </Form.Label>
-        <Form.Check
-          inline
-          label='Text'
-          name='group1'
-          type='radio'
-        />
-        <Form.Check
-          inline
-          label='File/Image'
-          name='group1'
-          type='radio'
-        />
-      </Form>
+      <MediaUpload allMedia={allMedia} setAllMedia={setAllMedia} />
 
-      <TextUpload allMedia={allMedia} setAllMedia={setAllMedia} />
-      <FileUpload allMedia={allMedia} setAllMedia={setAllMedia} />
+      <h5>Uploaded media</h5>
+      <AllMedia allMedia={allMedia} setAllMedia={setAllMedia} />
     </div>
   )
 }

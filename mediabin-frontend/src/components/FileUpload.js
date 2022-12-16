@@ -19,12 +19,9 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
   const handleFileUpload = async (event) => {
     event.preventDefault()
 
-    console.log('file', file)
-
     // Creates a copy of the file with a random name in order
     // not to overwrite existing files in AWS with the same name.
     const fileToUpload = new File([file], uuid())
-    console.log('fileToUpload', fileToUpload)
 
     try {
       const uploadedFile = await uploadFile(fileToUpload, awsConfig)
@@ -34,9 +31,6 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
         type: fileType,
         name: file.name
       })
-
-      console.log('newMedia', newMedia)
-
 
       setAllMedia(allMedia.concat(newMedia))
     } catch (e) {
@@ -56,33 +50,6 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
         <input type='submit' value='Upload file' />
       </form>
       <br />
-
-      {allMedia.map(media => {
-        if (media.type.split('/')[0] === 'image') {
-          return (
-            <p>
-              <img style={{ width: '10%', height: '10%' }} src={media.content} alt={'Unknown'} />
-              <br />
-              <a href={media.content}>
-                <button>Download {media.name}</button>
-              </a>
-            </p>
-          )
-        } else if (media.type === 'text') {
-          return (
-            <p>
-              {media.content}
-            </p>)
-        } else {
-          return (
-            <p>
-              <a href={media.content}>
-                <button>Download {media.name}</button>
-              </a>
-            </p>
-          )
-        }
-      })}
     </>
   )
 }
