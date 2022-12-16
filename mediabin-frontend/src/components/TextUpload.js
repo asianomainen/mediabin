@@ -1,5 +1,5 @@
-import mediaService from "../services/media";
-import { useState } from "react";
+import mediaService from '../services/media'
+import { useState } from 'react'
 
 const TextUpload = ({ allMedia, setAllMedia }) => {
   const [textArea, setTextArea] = useState('')
@@ -9,7 +9,7 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
   }
 
   const handleTextSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     try {
       const newMedia = await mediaService.createMedia({
@@ -18,7 +18,7 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
       })
 
       setAllMedia(allMedia.concat(newMedia))
-    } catch {
+    } catch (error) {
       alert('Something went wrong')
     }
     setTextArea('')
@@ -33,7 +33,7 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
           <textarea value={textArea} onChange={handleTextChange} />
           <br />
         </label>
-        <input type="submit" value="Create new media" />
+        <input type='submit' value='Create new media' />
       </form>
       <br />
     </>
