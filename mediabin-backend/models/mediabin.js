@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 
 const mediaSchema = new mongoose.Schema({
   content: mongoose.Schema.Types.Mixed,
-  type: String
+  type: String,
+  name: String
 })
 
 mediaSchema.set('toJSON', {

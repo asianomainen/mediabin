@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { uploadFile } from 'react-s3';
+import uuid from 'react-uuid';
+
 import mediaService from "./services/media"
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -53,14 +55,24 @@ const App = () => {
 
   const handleFileUpload = async (event) => {
     event.preventDefault()
+    console.log(file)
+
+    // Creates a copy of the file with a random name in order
+    // not to overwrite existing files in AWS with the same name.
+    const fileToUpload = new File([file], uuid())
+    console.log(fileToUpload)
 
     try {
-      const uploadedFile = await uploadFile(file, config)
+      const uploadedFile = await uploadFile(fileToUpload, config)
+      console.log(uploadedFile)
 
       const newMedia = await mediaService.createMedia({
         content: uploadedFile.location,
-        type: fileType
+        type: fileType,
+        name: file.name
       })
+
+      console.log(newMedia)
 
       setAllMedia(allMedia.concat(newMedia))
     } catch (e) {
@@ -99,6 +111,10 @@ const App = () => {
           return (
             <p>
               <img style={{ width: '10%', height: '10%' }} src={media.content} alt={'Unknown'} />
+              <br />
+              <a href={media.content}>
+                <button>Download {media.name}</button>
+              </a>
             </p>
           )
         } else if (media.type === 'text') {
@@ -110,7 +126,7 @@ const App = () => {
           return (
             <p>
               <a href={media.content}>
-                <button>Download file</button>
+                <button>Download {media.name}</button>
               </a>
             </p>
           )
