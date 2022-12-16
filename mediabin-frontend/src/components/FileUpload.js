@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import mediaService from '../services/media'
 import { awsConfig } from '../utils/config'
+import { Button, Form } from 'react-bootstrap'
 
 window.Buffer = window.Buffer || require('buffer').Buffer
 
@@ -19,11 +20,10 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
   const handleFileUpload = async (event) => {
     event.preventDefault()
 
-    // Creates a copy of the file with a random name in order
-    // not to overwrite existing files in AWS with the same name.
-    const fileToUpload = new File([file], uuid())
-
     try {
+      // Creates a copy of the file with a random name in order
+      // not to overwrite existing files in AWS with the same name.
+      const fileToUpload = new File([file], uuid())
       const uploadedFile = await uploadFile(fileToUpload, awsConfig)
 
       const newMedia = await mediaService.createMedia({
@@ -39,18 +39,16 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
   }
 
   return (
-    <>
-      <form onSubmit={handleFileUpload}>
-        <label>
-          File:
-          <br />
-          <input type='file' onChange={handleFileInput} />
-          <br />
-        </label>
-        <input type='submit' value='Upload file' />
-      </form>
-      <br />
-    </>
+    <div>
+      <Form onSubmit={handleFileUpload}>
+        <Form.Group controlId="formFile" className="mb-3">
+          <Form.Control type="file" onChange={handleFileInput} />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Create New Media
+        </Button>
+      </Form>
+    </div>
   )
 }
 

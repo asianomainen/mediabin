@@ -1,5 +1,6 @@
 import mediaService from '../services/media'
 import { useState } from 'react'
+import { Button, FloatingLabel, Form } from 'react-bootstrap'
 
 const TextUpload = ({ allMedia, setAllMedia }) => {
   const [textArea, setTextArea] = useState('')
@@ -25,18 +26,27 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
   }
 
   return (
-    <>
-      <form onSubmit={handleTextSubmit}>
-        <label>
-          Text:
-          <br />
-          <textarea value={textArea} onChange={handleTextChange} />
-          <br />
-        </label>
-        <input type='submit' value='Create new media' />
-      </form>
-      <br />
-    </>
+    <div>
+      <Form onSubmit={handleTextSubmit}>
+        <FloatingLabel
+          controlId="floatingTextarea"
+          label='Text'
+          className='mb-3'
+        >
+          <Form.Control
+            value={textArea}
+            as='textarea'
+            placeholder='Write your text here'
+            onChange={handleTextChange}
+          />
+        </FloatingLabel>
+
+        <Button variant="primary" type="submit">
+          Create New Media
+        </Button>
+
+      </Form>
+    </div>
   )
 }
 

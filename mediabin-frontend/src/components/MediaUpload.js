@@ -11,7 +11,7 @@ const MediaUpload = ({ allMedia, setAllMedia }) => {
   }
 
   return (
-    <>
+    <div>
       <Form onChange={handleMediaChoiceChange}>
         <Form.Label>
           Create new media
@@ -35,7 +35,7 @@ const MediaUpload = ({ allMedia, setAllMedia }) => {
         ? <TextUpload allMedia={allMedia} setAllMedia={setAllMedia} />
         : <FileUpload allMedia={allMedia} setAllMedia={setAllMedia} />
       }
-    </>
+    </div>
   )
 }
 
