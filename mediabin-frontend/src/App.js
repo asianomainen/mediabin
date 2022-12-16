@@ -111,6 +111,10 @@ const App = () => {
           return (
             <p>
               <img style={{ width: '10%', height: '10%' }} src={media.content} alt={'Unknown'} />
+              <br />
+              <a href={media.content}>
+                <button>Download {media.name}</button>
+              </a>
             </p>
           )
         } else if (media.type === 'text') {
