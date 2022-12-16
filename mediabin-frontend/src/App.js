@@ -95,7 +95,7 @@ const App = () => {
       <br />
 
       {allMedia.map(media => {
-        if (media.type === 'image/jpeg') {
+        if (media.type.split('/')[0] === 'image') {
           return (
             <p>
               <img style={{ width: '10%', height: '10%' }} src={media.content} alt={'Unknown'} />
@@ -109,7 +109,9 @@ const App = () => {
         } else {
           return (
             <p>
-              There will be a file here later.
+              <a href={media.content}>
+                <button>Download file</button>
+              </a>
             </p>
           )
         }
