@@ -1,11 +1,11 @@
-import uuid from "react-uuid";
-import { uploadFile } from "react-s3";
-import { useState } from "react";
+import uuid from 'react-uuid'
+import { uploadFile } from 'react-s3'
+import { useState } from 'react'
 
-import mediaService from "../services/media";
-import { awsConfig } from "../utils/config"
+import mediaService from '../services/media'
+import { awsConfig } from '../utils/config'
 
-window.Buffer = window.Buffer || require("buffer").Buffer;
+window.Buffer = window.Buffer || require('buffer').Buffer
 
 const FileUpload = ({ allMedia, setAllMedia }) => {
   const [file, setFile] = useState()
@@ -50,10 +50,10 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
         <label>
           File:
           <br />
-          <input type="file" onChange={handleFileInput} />
+          <input type='file' onChange={handleFileInput} />
           <br />
         </label>
-        <input type="submit" value="Upload file" />
+        <input type='submit' value='Upload file' />
       </form>
       <br />
 
