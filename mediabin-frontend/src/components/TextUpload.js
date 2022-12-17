@@ -1,6 +1,5 @@
 import mediaService from '../services/media'
 import { useState } from 'react'
-import { Button, FloatingLabel, Form } from 'react-bootstrap'
 
 const TextUpload = ({ allMedia, setAllMedia }) => {
   const [textArea, setTextArea] = useState('')
@@ -27,25 +26,26 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
 
   return (
     <div>
-      <Form onSubmit={handleTextSubmit}>
-        <FloatingLabel
-          controlId="floatingTextarea"
-          label='Text'
-          className='mb-3'
-        >
-          <Form.Control
-            value={textArea}
-            as='textarea'
-            placeholder='Write your text here'
-            onChange={handleTextChange}
-          />
-        </FloatingLabel>
-
-        <Button variant="primary" type="submit">
-          Create New Media
-        </Button>
-
-      </Form>
+      <form onSubmit={handleTextSubmit}>
+        <div className="w-full mb-4 border rounded-lg bg-[#403e3d] border-[#403e3d]">
+          <div className="px-4 py-2 rounded-t-lg bg-[#2b2b2b]">
+            <label htmlFor="text-media" className="sr-only"></label>
+            <textarea id="text" rows="15"
+              className="w-full px-0 text-sm text-[#ddd] bg-[#2b2b2b] focus:ring-0 focus:outline-none placeholder-[#ddd]"
+              required
+              placeholder='Write your text here...'
+              onChange={handleTextChange}>
+            </textarea>
+          </div>
+          <div className="flex items-center justify-between px-3 py-2 border-gray-600">
+            <button type="submit"
+              className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-800">
+              Create new media
+            </button>
+          </div>
+        </div>
+      </form>
+      <br />
     </div>
   )
 }

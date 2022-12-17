@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 import mediaService from '../services/media'
 import { awsConfig } from '../utils/config'
-import { Button, Form } from 'react-bootstrap'
 
 window.Buffer = window.Buffer || require('buffer').Buffer
 
@@ -40,14 +39,28 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
 
   return (
     <div>
-      <Form onSubmit={handleFileUpload}>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Control type="file" onChange={handleFileInput} />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Create New Media
-        </Button>
-      </Form>
+      <form onSubmit={handleFileUpload}>
+        <div className="mb-4 w-full rounded-lg border border-[#403e3d] bg-[#403e3d]">
+          <div className="rounded-t-lg bg-[#2b2b2b] px-3 py-2">
+            <label htmlFor="text-media" className="sr-only"></label>
+            <form className="flex items-center space-x-6">
+              <label className="block">
+                <span className="sr-only">Choose file</span>
+                <input type="file"
+                  className="block cursor-pointer rounded-lg border border-[#403e3d] text-sm text-[#ddd] file:mr-4 file:rounded-l file:border-0 file:bg-[#403e3d] file:py-2 file:px-4 file:text-sm file:font-semibold file:text-[#ddd] hover:file:bg-orange-800"
+                  onChange={handleFileInput}
+                />
+              </label>
+            </form>
+          </div>
+          <div className="flex items-center justify-between border-gray-600 px-3 py-2">
+            <button type="submit"
+              className="inline-flex items-center rounded-lg bg-[#2b2b2b] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:bg-orange-800">Create
+              new media
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   )
 }
