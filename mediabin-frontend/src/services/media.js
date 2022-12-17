@@ -12,9 +12,15 @@ const createMedia = async (newMedia) => {
   return response.data
 }
 
+const getOne = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`)
+  return response.data
+}
+
 const exportable = {
   getAll,
-  createMedia
+  createMedia,
+  getOne
 }
 
 export default exportable
