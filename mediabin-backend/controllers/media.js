@@ -15,4 +15,18 @@ mediaRouter.post('/', async (request, response) => {
   response.status(201).json(savedMedia)
 })
 
+mediaRouter.get('/:id', async (request, response, next) => {
+  try {
+    const foundMedia = await Media.findById(request.params.id)
+
+    if (foundMedia) {
+      return response.json(foundMedia)
+    } else {
+      return response.status(404).end()
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = mediaRouter
