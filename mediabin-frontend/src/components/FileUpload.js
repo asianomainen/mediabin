@@ -32,6 +32,8 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
       })
 
       setAllMedia(allMedia.concat(newMedia))
+      setFile(null)
+      setFileType(null)
     } catch (e) {
       console.error(e)
     }
@@ -41,15 +43,13 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
     <div>
       <form onSubmit={handleFileUpload}>
         <div className="mb-4 w-full rounded-lg border border-[#403e3d] bg-[#403e3d]">
-          <div className="rounded-t-lg bg-[#2b2b2b] px-3 py-2">
+          <div className="flex rounded-t-lg bg-[#2b2b2b] px-3 py-2">
             <label htmlFor="text-media" className="sr-only"></label>
-            <div className="flex items-center space-x-6">
+            <div className="flex py-1 items-center space-x-6">
               <label className="block">
-                <span className="sr-only">Choose file</span>
                 <input type="file"
-                  className="block cursor-pointer rounded-lg border border-[#403e3d] text-sm text-[#ddd] file:mr-4 file:rounded-l file:border-0 file:bg-[#403e3d] file:py-2 file:px-4 file:text-sm file:font-semibold file:text-[#ddd] hover:file:bg-orange-800"
-                  onChange={handleFileInput}
-                />
+                  className="block cursor-pointer rounded-lg border border-[#403e3d] pr-5  text-sm text-[#ddd] file:mr-4 file:rounded-l file:border-0 file:bg-[#403e3d] file:py-2 file:px-4 file:text-sm file:font-semibold file:text-[#ddd] hover:file:bg-orange-800"
+                  onChange={handleFileInput} />
               </label>
             </div>
           </div>
