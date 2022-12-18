@@ -16,7 +16,6 @@ mediaRouter.post('/', async (request, response) => {
   } else {
     media = new Media({
       ...request.body,
-      size: request.headers['content-length']
     })
   }
 
