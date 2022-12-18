@@ -1,6 +1,16 @@
 import icon from '../static/images/MediaBIN-icon.png'
 
 const Footer = () => {
+
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
+
+  const onClickUrl = (url) => {
+    return () => openInNewTab(url)
+  }
+
   return (
     <footer className="bg-[#202020] text-center text-[#ddd] lg:text-left">
       <div className="flex items-center justify-center">
@@ -12,13 +22,13 @@ const Footer = () => {
                 <img className="pr-3" src={icon} alt="Mediabin small icon" />
                 MEDIABIN
               </h6>
-              <p className="mb-4 flex items-center justify-center pr-6 md:justify-start">Mediabin: Your one-stop shop
+              <p className="mb-4 flex items-center justify-center pr-6 md:justify-start">Your one-stop shop
                 for sharing text, files, and images</p>
             </div>
 
             <div className="">
               <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start">Links</h6>
-              <a href="https://github.com/asianomainen/">
+              <a className="cursor-pointer" onClick={onClickUrl('https://github.com/asianomainen/')}>
                 <p className="mb-4 flex items-center justify-center md:justify-start">
                   <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" className="mr-4 w-4"
                     role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
@@ -28,7 +38,8 @@ const Footer = () => {
                   GitHub
                 </p>
               </a>
-              <a href="https://www.linkedin.com/in/oskari-nuottonen-b80725226/">
+              <a className="cursor-pointer"
+                onClick={onClickUrl('https://www.linkedin.com/in/oskari-nuottonen-b80725226/')}>
                 <p className="mb-4 flex items-center justify-center md:justify-start">
                   <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" className="mr-4 w-4"
                     role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
