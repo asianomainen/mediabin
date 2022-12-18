@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
+import { Route, Routes, useMatch } from 'react-router-dom'
 
 import mediaService from './services/media'
 import Media from './components/Media'
 import Menu from './components/Menu'
-import { Route, Routes, useMatch } from 'react-router-dom'
 import styles from './index.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -28,7 +28,7 @@ const App = () => {
   return (
     <div style={styles} className="bg-[#252525] text-[#ddd] flex flex-col h-screen">
       <Header />
-      <div className="flex-1 py-2 container overflow-y-scroll max-w-7xl">
+      <div className="flex-1 py-2 container overflow-auto max-w-7xl">
         <Routes>
           <Route>
             <Route path="/" element={<Menu allMedia={allMedia} setAllMedia={setAllMedia} />} />

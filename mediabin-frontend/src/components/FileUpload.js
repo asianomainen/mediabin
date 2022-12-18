@@ -28,8 +28,11 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
       const newMedia = await mediaService.createMedia({
         content: uploadedFile.location,
         type: fileType,
-        name: file.name
+        name: file.name,
+        size: fileToUpload.size
       })
+
+      console.log(newMedia)
 
       setAllMedia(allMedia.concat(newMedia))
       setFile(null)
