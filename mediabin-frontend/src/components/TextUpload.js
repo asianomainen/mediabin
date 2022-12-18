@@ -18,6 +18,8 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
         name: textArea.slice(0, 3)
       })
 
+      console.log(newMedia)
+
       setAllMedia(allMedia.concat(newMedia))
       setTextArea('')
     } catch (error) {

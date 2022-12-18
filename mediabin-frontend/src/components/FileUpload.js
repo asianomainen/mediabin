@@ -32,8 +32,6 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
         size: fileToUpload.size
       })
 
-      console.log(newMedia)
-
       setAllMedia(allMedia.concat(newMedia))
       setFile(null)
       setFileType(null)
