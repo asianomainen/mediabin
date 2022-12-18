@@ -9,8 +9,11 @@ const MediaList = ({ allMedia }) => {
         return (
           <div key={media.id} className="py-1.5">
             <Link to={`/${media.id}`} className="text-lg text-orange-400">{media.name}</Link>
-            <div className="text-sm text-[#999]">
-              {media.type} | {byteSize(media.size).toString()}
+            <div className="flex text-sm text-[#999]">
+              {media.type ? media.type :
+                <div className="text-sm text-red-500">
+                  unknown&nbsp;</div>
+              } | {byteSize(media.size).toString()}
             </div>
           </div>
         )
