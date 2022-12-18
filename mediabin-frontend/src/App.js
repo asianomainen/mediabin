@@ -26,9 +26,9 @@ const App = () => {
   }, [])
 
   return (
-    <div style={styles} className="min-h-screen bg-[#252525] text-[#ddd]">
+    <div style={styles} className="bg-[#252525] text-[#ddd] flex flex-col h-screen">
       <Header />
-      <div className="container max-w-7xl">
+      <div className="flex-1 py-2 container overflow-y-scroll max-w-7xl">
         <Routes>
           <Route>
             <Route path="/" element={<Menu allMedia={allMedia} setAllMedia={setAllMedia} />} />
