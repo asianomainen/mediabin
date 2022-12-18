@@ -2,7 +2,7 @@ import logo from '../static/images/MediaBIN.svg'
 
 const Header = () => {
   return (
-    <div
+    <header
       className="flex py-5 items-center justify-center font-semibold text-2xl bg-[#202020] border-b-2 border-[#2b2b2b]">
       <div className="flex px-10">
         <div>
@@ -12,7 +12,7 @@ const Header = () => {
           Welcome to Mediabin
         </div>
       </div>
-    </div>
+    </header>
   )
 }
 
