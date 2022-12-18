@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import byteSize from 'byte-size'
 
 const MediaList = ({ allMedia }) => {
   return (
@@ -6,8 +7,11 @@ const MediaList = ({ allMedia }) => {
       <label className="border-b-2 border-[#333333] font-semibold">Latest media</label>
       {allMedia.map(media => {
         return (
-          <div key={media.id} className="py-1">
-            <Link to={`/${media.id}`}>{media.name}</Link>
+          <div key={media.id} className="py-1.5">
+            <Link to={`/${media.id}`} className="text-lg text-orange-400">{media.name}</Link>
+            <div className="text-sm text-[#999]">
+              {media.type} | {byteSize(media.size).toString()}
+            </div>
           </div>
         )
       })}
