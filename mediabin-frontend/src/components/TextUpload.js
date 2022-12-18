@@ -14,14 +14,15 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
     try {
       const newMedia = await mediaService.createMedia({
         content: textArea,
-        type: 'text'
+        type: 'text',
+        name: textArea.slice(0, 3)
       })
 
       setAllMedia(allMedia.concat(newMedia))
+      setTextArea('')
     } catch (error) {
       alert('Something went wrong')
     }
-    setTextArea('')
   }
 
   return (
@@ -34,6 +35,7 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
               className="w-full px-0 text-sm text-[#ddd] bg-[#2b2b2b] focus:ring-0 focus:outline-none placeholder-[#ddd]"
               required
               placeholder='Write your text here...'
+              value={textArea}
               onChange={handleTextChange}>
             </textarea>
           </div>

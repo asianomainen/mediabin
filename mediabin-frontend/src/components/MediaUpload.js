@@ -2,7 +2,7 @@ import TextUpload from './TextUpload'
 import FileUpload from './FileUpload'
 import { useState } from 'react'
 
-const MediaType = ({ allMedia, setAllMedia }) => {
+const MediaUpload = ({ allMedia, setAllMedia }) => {
   const [mediaChoice, setMediaChoice] = useState(true)
 
   const handleMediaChoiceChange = () => {
@@ -37,4 +37,4 @@ const MediaType = ({ allMedia, setAllMedia }) => {
   )
 }
 
-export default MediaType
+export default MediaUpload

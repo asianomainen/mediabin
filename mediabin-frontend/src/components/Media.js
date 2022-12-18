@@ -1,3 +1,7 @@
+import Image from './Image'
+import Text from './Text'
+import File from './File'
+
 const Media = ({ media }) => {
   if (!media) {
     return (
@@ -8,10 +12,15 @@ const Media = ({ media }) => {
   }
 
   return (
-    <div>
-      <li key={media.id}>
-        {media.name}
-      </li>
+    <div className='min-h-screen bg-[#252525] text-[#ddd]'>
+      <div className='container max-w-7xl'>
+        {media.type.split('/')[0] === 'image'
+          ? <Image media={media} />
+          : media.type === 'text'
+            ? <Text media={media} />
+            : <File media={media} />
+        }
+      </div>
     </div>
   )
 }
