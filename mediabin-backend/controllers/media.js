@@ -7,9 +7,18 @@ mediaRouter.get('/', async (request, response) => {
 })
 
 mediaRouter.post('/', async (request, response) => {
-  const media = new Media({
-    ...request.body
-  })
+  let media
+  if (request.body.type === 'text') {
+    media = new Media({
+      ...request.body,
+      size: request.headers['content-length']
+    })
+  } else {
+    media = new Media({
+      ...request.body,
+      size: request.headers['content-length']
+    })
+  }
 
   const savedMedia = await media.save()
   response.status(201).json(savedMedia)
