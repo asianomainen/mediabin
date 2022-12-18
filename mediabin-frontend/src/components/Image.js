@@ -1,6 +1,23 @@
 import byteSize from 'byte-size'
+import { useState } from 'react'
 
 const Image = ({ media }) => {
+  const [copied, setCopied] = useState(false)
+  const btnStyle = copied ? 'bg-orange-800 text-white' : ''
+
+  const copyToClipboard = () => {
+    window.navigator.clipboard.writeText(`https://mediabin.fly.dev/${media.id}`).then(
+      () => {
+        setCopied(true)
+        setTimeout(() => {
+          setCopied(false)
+        }, 2000)
+      },
+      (error) => {
+        console.log('Could not copy URL', error.message)
+      }
+    )
+  }
 
   const openInNewTab = (url) => {
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
@@ -21,9 +38,22 @@ const Image = ({ media }) => {
           File name:
           <div className="pl-3 text-lg font-semibold text-[#ddd]">{media.name}</div>
         </div>
-        <div className="flex pb-3 text-lg font-light text-orange-400">
+        <div className="flex text-lg font-light text-orange-400">
           File size:
           <div className="pl-3 text-lg font-semibold text-[#ddd]">{byteSize(media.size).toString()}</div>
+        </div>
+        <div className="flex pb-3 text-lg font-light text-orange-400">
+          Share:
+          <div className="flex pl-3 text-lg font-light text-[#ddd]"
+            onClick={copyToClipboard}>
+            <div className="pr-3">
+              {`https://mediabin.fly.dev/${media.id}`}
+            </div>
+            <button type="submit"
+              className={btnStyle + ' items-center w-28 rounded-lg bg-[#2b2b2b] text-center text-xs font-medium text-[#ddd] hover:bg-orange-800'}>
+              {copied ? 'URL copied' : 'Copy to clipboard'}
+            </button>
+          </div>
         </div>
         <a onClick={onClickUrl(media.content)}>
           <button type="submit"
