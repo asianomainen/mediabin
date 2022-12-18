@@ -12,12 +12,11 @@ const Image = ({ media }) => {
   }
 
   return (
-    <div className="flex pt-5 justify-center">
-      <img className="max-w-md" src={media.content} alt={'Unknown upload by an unknown person'} />
-      <div className="items-start pl-5">
-        <p className="pb-3 font-semibold text-2xl">
+    <div className="flex flex-col p-1 justify-center">
+      <div className="items-start p-3 border-b-2 border-[#333333]">
+        <div className="pb-3 font-semibold text-2xl">
           Media Info
-        </p>
+        </div>
         <div className="flex text-lg font-light text-orange-400">
           File name:
           <div className="pl-3 text-lg font-semibold text-[#ddd]">{media.name}</div>
@@ -27,11 +26,14 @@ const Image = ({ media }) => {
           <div className="pl-3 text-lg font-semibold text-[#ddd]">{byteSize(media.size).toString()}</div>
         </div>
         <a onClick={onClickUrl(media.content)}>
-          <button
-            className="border-2 border-[#999] py-2.5 px-4 text-md font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-800">
+          <button type="submit"
+            className="rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:bg-orange-800">
             Preview full size image
           </button>
         </a>
+      </div>
+      <div className="p-3 whitespace-pre-line">
+        <img className="max-w-md drop-shadow-lg" src={media.content} alt={'Unknown upload by an unknown person'} />
       </div>
     </div>
   )
