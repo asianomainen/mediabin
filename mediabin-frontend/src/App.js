@@ -5,6 +5,8 @@ import Media from './components/Media'
 import Menu from './components/Menu'
 import { Route, Routes, useMatch } from 'react-router-dom'
 import styles from './index.css'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 const App = () => {
   const [allMedia, setAllMedia] = useState([])
@@ -24,15 +26,17 @@ const App = () => {
   }, [])
 
   return (
-    <div style={styles} className='min-h-screen bg-[#252525] text-[#ddd]'>
-      <div className='container max-w-7xl'>
+    <div style={styles} className="min-h-screen bg-[#252525] text-[#ddd]">
+      <Header />
+      <div className="container max-w-7xl">
         <Routes>
           <Route>
-            <Route path='/' element={<Menu allMedia={allMedia} setAllMedia={setAllMedia} />} />
-            <Route path='/:id' element={<Media media={media} />} />
+            <Route path="/" element={<Menu allMedia={allMedia} setAllMedia={setAllMedia} />} />
+            <Route path="/:id" element={<Media media={media} />} />
           </Route>
         </Routes>
       </div>
+      <Footer />
     </div>
   )
 }

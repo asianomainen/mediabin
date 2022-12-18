@@ -34,7 +34,7 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
             <textarea id="text" rows="15"
               className="w-full px-0 text-sm text-[#ddd] bg-[#2b2b2b] focus:ring-0 focus:outline-none placeholder-[#ddd]"
               required
-              placeholder='Write your text here...'
+              placeholder="Write your text here..."
               value={textArea}
               onChange={handleTextChange}>
             </textarea>
@@ -47,7 +47,6 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
           </div>
         </div>
       </form>
-      <br />
     </div>
   )
 }
