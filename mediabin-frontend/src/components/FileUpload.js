@@ -33,8 +33,6 @@ const FileUpload = ({ allMedia, setAllMedia }) => {
       })
 
       setAllMedia(allMedia.concat(newMedia))
-      setFile(null)
-      setFileType(null)
     } catch (e) {
       console.error(e)
     }
