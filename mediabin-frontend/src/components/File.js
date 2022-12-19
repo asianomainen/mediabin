@@ -64,7 +64,7 @@ const File = ({ media }) => {
           </div>
         </div>
       </div>
-      <div className="bg-[#2b2b2b] my-3 p-3 whitespace-pre-line">
+      <div className="bg-[#2b2b2b] my-3 p-3 font-mono whitespace-pre-wrap">
         {fileContent}
       </div>
     </div>
