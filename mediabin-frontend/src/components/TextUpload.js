@@ -1,11 +1,10 @@
 import mediaService from '../services/media'
-import { useContext, useState } from 'react'
-import { MediaContext } from '../App'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const TextUpload = () => {
   const [textArea, setTextArea] = useState('')
-  const [allMedia, setAllMedia] = useContext(MediaContext)
-
+  const navigate = useNavigate()
 
   const handleTextChange = (event) => {
     setTextArea(event.target.value)
@@ -21,8 +20,12 @@ const TextUpload = () => {
         name: textArea.slice(0, 3)
       })
 
-      setAllMedia(allMedia.concat(newMedia))
       setTextArea('')
+      navigate(`/${newMedia.id}`, {
+        state: {
+          media: newMedia
+        }
+      })
     } catch (error) {
       alert('Something went wrong')
     }
