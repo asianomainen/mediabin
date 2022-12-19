@@ -12,7 +12,7 @@ const MediaList = () => {
       {allMedia.map(media => {
         return (
           <div key={media.id} className="py-1.5 border-dotted border-b-2 border-[#333333]">
-            <Link to={`/${media.id}`} className="text-lg text-orange-400">{media.name}</Link>
+            <Link to={`/${media.id}`} className="text-lg text-orange-400">{media.title}</Link>
             <div className="flex text-sm text-[#999]">
               {media.type ? media.type :
                 <div className="text-sm text-red-500">

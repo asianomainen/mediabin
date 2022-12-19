@@ -27,7 +27,7 @@ const Text = ({ media }) => {
         </div>
         <div className="flex text-lg font-light text-orange-400">
           Text title:
-          <div className="pl-3 font-semibold text-[#ddd]">{media.name}</div>
+          <div className="pl-3 font-semibold text-[#ddd]">{media.title}</div>
         </div>
         <div className="flex text-lg font-light text-orange-400">
           File size:

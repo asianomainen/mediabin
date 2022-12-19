@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 const TextUpload = () => {
   const [textArea, setTextArea] = useState('')
+  const [title, setTitle] = useState('')
   const navigate = useNavigate()
 
   const handleTextChange = (event) => {
@@ -17,7 +18,7 @@ const TextUpload = () => {
       const newMedia = await mediaService.createMedia({
         content: textArea,
         type: 'text',
-        name: textArea.slice(0, 3)
+        title: title.trim().length === 0 ? 'Untitled' : title
       })
 
       setTextArea('')
@@ -29,6 +30,10 @@ const TextUpload = () => {
     } catch (error) {
       alert('Something went wrong')
     }
+  }
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value)
   }
 
   return (
@@ -45,7 +50,16 @@ const TextUpload = () => {
               onChange={handleTextChange}>
             </textarea>
           </div>
-          <div className="flex items-center justify-between px-3 py-2 border-gray-600">
+
+          <div className="flex items-center justify-between px-3 py-2">
+            <div className="flex">
+              <div className="p-1 pr-2">
+                <label>Title / Name:</label>
+              </div>
+              <input className="pl-2 mr-0 rounded-lg focus:ring-0 focus:outline-none bg-[#2b2b2b] p-1"
+                placeholder="Untitled"
+                onChange={handleTitleChange} />
+            </div>
             <button type="submit"
               className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-800">
               Create new media

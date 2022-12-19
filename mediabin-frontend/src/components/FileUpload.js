@@ -11,6 +11,7 @@ window.Buffer = window.Buffer || require('buffer').Buffer
 const FileUpload = () => {
   const [file, setFile] = useState()
   const [fileType, setFileType] = useState()
+  const [title, setTitle] = useState('')
   const navigate = useNavigate()
 
   const handleFileInput = (event) => {
@@ -27,11 +28,14 @@ const FileUpload = () => {
       const fileToUpload = new File([file], uuid())
       const uploadedFile = await uploadFile(fileToUpload, awsConfig)
 
+      console.log(file.name)
+
       const newMedia = await mediaService.createMedia({
         content: uploadedFile.location,
         type: fileType,
-        name: file.name,
-        size: fileToUpload.size
+        fileName: file.name,
+        size: fileToUpload.size,
+        title: title.trim().length === 0 ? 'Untitled' : title
       })
 
       navigate(`/${newMedia.id}`, {
@@ -42,6 +46,10 @@ const FileUpload = () => {
     } catch (e) {
       console.error(e)
     }
+  }
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value)
   }
 
   return (
@@ -58,10 +66,18 @@ const FileUpload = () => {
               </label>
             </div>
           </div>
-          <div className="flex items-center justify-between border-gray-600 px-3 py-2">
+          <div className="flex items-center justify-between px-3 py-2">
+            <div className="flex">
+              <div className="p-1 pr-2">
+                <label>Title / Name:</label>
+              </div>
+              <input className="pl-2 mr-0 rounded-lg focus:ring-0 focus:outline-none bg-[#2b2b2b] p-1"
+                placeholder="Untitled"
+                onChange={handleTitleChange} />
+            </div>
             <button type="submit"
-              className="inline-flex items-center rounded-lg bg-[#2b2b2b] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:bg-orange-800">Create
-              new media
+              className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-800">
+              Create new media
             </button>
           </div>
         </div>

@@ -36,7 +36,7 @@ const Image = ({ media }) => {
         </div>
         <div className="flex text-lg font-light text-orange-400">
           File name:
-          <div className="pl-3 text-lg font-semibold text-[#ddd]">{media.name}</div>
+          <div className="pl-3 text-lg font-semibold text-[#ddd]">{media.fileName}</div>
         </div>
         <div className="flex text-lg font-light text-orange-400">
           File size:
