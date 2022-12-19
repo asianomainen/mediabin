@@ -47,7 +47,7 @@ const Text = ({ media }) => {
           </div>
         </div>
       </div>
-      <div className="bg-[#2b2b2b] my-3 p-3 font-mono whitespace-pre-wrap">
+      <div className="bg-[#2b2b2b] my-3 p-3 font-mono whitespace-pre-wrap break-words">
         {media.content}
       </div>
     </div>
