@@ -28,8 +28,6 @@ const FileUpload = () => {
       const fileToUpload = new File([file], uuid())
       const uploadedFile = await uploadFile(fileToUpload, awsConfig)
 
-      console.log(file.name)
-
       const newMedia = await mediaService.createMedia({
         content: uploadedFile.location,
         type: fileType,

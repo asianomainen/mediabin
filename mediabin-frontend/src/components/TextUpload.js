@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const TextUpload = () => {
   const [textArea, setTextArea] = useState('')
   const [title, setTitle] = useState('')
+  const [hidden, setHidden] = useState(false)
   const navigate = useNavigate()
 
   const handleTextChange = (event) => {
@@ -18,7 +19,8 @@ const TextUpload = () => {
       const newMedia = await mediaService.createMedia({
         content: textArea,
         type: 'text',
-        title: title.trim().length === 0 ? 'Untitled' : title
+        title: title.trim().length === 0 ? 'Untitled' : title,
+        hidden: hidden
       })
 
       setTextArea('')
@@ -34,6 +36,10 @@ const TextUpload = () => {
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value)
+  }
+
+  const handleHiddenChange = () => {
+    setHidden(!hidden)
   }
 
   return (
@@ -56,10 +62,22 @@ const TextUpload = () => {
               <div className="p-1 pr-2">
                 <label>Title / Name:</label>
               </div>
-              <input className="pl-2 mr-0 rounded-lg focus:ring-0 focus:outline-none bg-[#2b2b2b] p-1"
-                placeholder="Untitled"
-                onChange={handleTitleChange} />
+              <div>
+                <input className="mr-0 rounded-lg bg-[#2b2b2b] p-1 pl-2 focus:outline-none focus:ring-0"
+                  placeholder="Untitled" onChange={handleTitleChange} />
+              </div>
+              <div className="p-1 pl-6">
+                <div className="group relative inline-block">
+                  <label className="pr-2">Hidden:</label>
+                  <input type="checkbox" className="w-4 accent-orange-800" onChange={handleHiddenChange} />
+                  <span
+                    className="absolute -left-6 -top-2 hidden w-48 -translate-y-full rounded-lg bg-[#202020] px-2 py-1 text-center text-sm text-[#ddd] after:absolute after:left-1/2 after:top-[100%] after:-translate-x-1/2 after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-[#202020] after:content-[''] group-hover:flex"
+                  >Hides your media from the &quot;Latest media&quot; list
+                  </span>
+                </div>
+              </div>
             </div>
+
             <button type="submit"
               className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-800">
               Create new media
