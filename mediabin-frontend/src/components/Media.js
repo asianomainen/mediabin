@@ -1,11 +1,22 @@
 import Image from './Image'
 import Text from './Text'
 import File from './File'
-import { useContext } from 'react'
-import { MediaContext } from '../App'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import mediaService from '../services/media'
 
 const Media = () => {
-  const [, , media] = useContext(MediaContext)
+  const [media, setMedia] = useState()
+  const location = useLocation()
+
+  useEffect(() => {
+    const fetchMedia = async () => {
+      const fetchedMedia = await mediaService.getOne(location.pathname.substring(1))
+      setMedia(fetchedMedia)
+    }
+
+    fetchMedia().catch(console.error)
+  }, [])
 
   if (!media) {
     return (

@@ -3,7 +3,7 @@ const Media = require('../models/mediabin')
 
 mediaRouter.get('/', async (request, response) => {
   const allMedia = await Media.find({})
-  const tenLatest = allMedia.reverse().slice(0, 10)
+  const tenLatest = allMedia.filter(media => media.hidden === false).reverse().slice(0, 10)
   response.json(tenLatest)
 })
 
