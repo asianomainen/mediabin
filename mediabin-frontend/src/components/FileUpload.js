@@ -1,17 +1,17 @@
 import uuid from 'react-uuid'
 import { uploadFile } from 'react-s3'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
 import mediaService from '../services/media'
 import { awsConfig } from '../utils/config'
-import { MediaContext } from '../App'
+import { useNavigate } from 'react-router-dom'
 
 window.Buffer = window.Buffer || require('buffer').Buffer
 
 const FileUpload = () => {
   const [file, setFile] = useState()
   const [fileType, setFileType] = useState()
-  const [allMedia, setAllMedia] = useContext(MediaContext)
+  const navigate = useNavigate()
 
   const handleFileInput = (event) => {
     setFile(event.target.files[0])
@@ -34,7 +34,11 @@ const FileUpload = () => {
         size: fileToUpload.size
       })
 
-      setAllMedia(allMedia.concat(newMedia))
+      navigate(`/${newMedia.id}`, {
+        state: {
+          media: newMedia
+        }
+      })
     } catch (e) {
       console.error(e)
     }

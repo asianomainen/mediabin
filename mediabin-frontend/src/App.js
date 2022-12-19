@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
-import { Route, Routes, useMatch } from 'react-router-dom'
+import { Route, Routes, useLocation, useMatch } from 'react-router-dom'
 
 import mediaService from './services/media'
 import Media from './components/Media'
@@ -12,6 +12,7 @@ export const MediaContext = createContext({})
 
 const App = () => {
   const [allMedia, setAllMedia] = useState([])
+  const location = useLocation()
 
   const match = useMatch('/:id')
   const media = match
@@ -19,17 +20,17 @@ const App = () => {
     : null
 
   useEffect(() => {
-    fetchMedia().catch(console.error)
-  }, [])
+    const fetchMedia = async () => {
+      const fetchedMedia = await mediaService.getAll()
+      setAllMedia(fetchedMedia)
+    }
 
-  const fetchMedia = async () => {
-    const fetchedMedia = await mediaService.getAll()
-    setAllMedia(fetchedMedia)
-  }
+    fetchMedia().catch(console.error)
+  }, [location])
 
   return (
     <div style={styles} className="bg-[#252525] text-[#ddd] flex flex-col h-screen">
-      <MediaContext.Provider value={[allMedia, setAllMedia, fetchMedia, media]}>
+      <MediaContext.Provider value={[allMedia, setAllMedia, media]}>
         <Header />
         <div className="flex-1 py-2 container overflow-auto max-w-7xl">
           <Routes>

@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { MediaContext } from '../App'
 
 const Media = () => {
-  const [, , , media] = useContext(MediaContext)
+  const [, , media] = useContext(MediaContext)
 
   if (!media) {
     return (
