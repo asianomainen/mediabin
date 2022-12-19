@@ -2,7 +2,7 @@ import TextUpload from './TextUpload'
 import FileUpload from './FileUpload'
 import { useState } from 'react'
 
-const MediaUpload = ({ allMedia, setAllMedia }) => {
+const MediaUpload = () => {
   const [mediaChoice, setMediaChoice] = useState(true)
 
   const handleMediaChoiceChange = () => {
@@ -30,8 +30,8 @@ const MediaUpload = ({ allMedia, setAllMedia }) => {
       </form>
 
       {mediaChoice === true
-        ? <TextUpload allMedia={allMedia} setAllMedia={setAllMedia} />
-        : <FileUpload allMedia={allMedia} setAllMedia={setAllMedia} />
+        ? <TextUpload />
+        : <FileUpload />
       }
     </div>
   )

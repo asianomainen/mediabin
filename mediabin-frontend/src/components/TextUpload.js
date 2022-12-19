@@ -1,8 +1,11 @@
 import mediaService from '../services/media'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { MediaContext } from '../App'
 
-const TextUpload = ({ allMedia, setAllMedia }) => {
+const TextUpload = () => {
   const [textArea, setTextArea] = useState('')
+  const [allMedia, setAllMedia] = useContext(MediaContext)
+
 
   const handleTextChange = (event) => {
     setTextArea(event.target.value)
@@ -17,8 +20,6 @@ const TextUpload = ({ allMedia, setAllMedia }) => {
         type: 'text',
         name: textArea.slice(0, 3)
       })
-
-      console.log(newMedia)
 
       setAllMedia(allMedia.concat(newMedia))
       setTextArea('')

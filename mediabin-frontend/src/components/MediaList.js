@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom'
 import byteSize from 'byte-size'
+import { useContext } from 'react'
+import { MediaContext } from '../App'
 
-const MediaList = ({ allMedia }) => {
+const MediaList = () => {
+  const [allMedia] = useContext(MediaContext)
+
   return (
     <div className="flex flex-col">
       <label className="border-b-2 border-[#333333] font-semibold">Latest media</label>

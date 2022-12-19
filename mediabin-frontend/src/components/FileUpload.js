@@ -1,15 +1,17 @@
 import uuid from 'react-uuid'
 import { uploadFile } from 'react-s3'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import mediaService from '../services/media'
 import { awsConfig } from '../utils/config'
+import { MediaContext } from '../App'
 
 window.Buffer = window.Buffer || require('buffer').Buffer
 
-const FileUpload = ({ allMedia, setAllMedia }) => {
+const FileUpload = () => {
   const [file, setFile] = useState()
   const [fileType, setFileType] = useState()
+  const [allMedia, setAllMedia] = useContext(MediaContext)
 
   const handleFileInput = (event) => {
     setFile(event.target.files[0])
