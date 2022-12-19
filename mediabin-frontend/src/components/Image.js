@@ -42,7 +42,7 @@ const Image = ({ media }) => {
           File size:
           <div className="pl-3 text-lg font-semibold text-[#ddd]">{byteSize(media.size).toString()}</div>
         </div>
-        <div className="flex pb-3 text-lg font-light text-orange-400">
+        <div className="flex text-lg font-light text-orange-400">
           Share:
           <div className="flex pl-3 text-lg font-light text-[#ddd]"
             onClick={copyToClipboard}>
@@ -55,12 +55,14 @@ const Image = ({ media }) => {
             </button>
           </div>
         </div>
-        <a onClick={onClickUrl(media.content)}>
-          <button type="submit"
-            className="rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:bg-orange-800">
-            Preview full size image
-          </button>
-        </a>
+        <div className="pt-2">
+          <a onClick={onClickUrl(media.content)}>
+            <button type="submit"
+              className="rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:bg-orange-800">
+              Preview full size image
+            </button>
+          </a>
+        </div>
       </div>
       <div className="p-3 whitespace-pre-line">
         <img className="max-w-md drop-shadow-lg" src={media.content} alt={'Unknown upload by an unknown person'} />

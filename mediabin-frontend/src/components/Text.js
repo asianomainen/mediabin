@@ -31,7 +31,7 @@ const Text = ({ media }) => {
         </div>
         <div className="flex text-lg font-light text-orange-400">
           File size:
-          <div className="pl-3 text-lg font-semibold text-[#ddd]">{byteSize(media.size).toString()}</div>
+          <div className="pl-3 text-lg font-light text-[#ddd]">{byteSize(media.size).toString()}</div>
         </div>
         <div className="flex text-lg font-light text-orange-400">
           Share:
