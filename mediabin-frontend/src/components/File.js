@@ -36,6 +36,32 @@ const File = ({ media }) => {
     )
   }
 
+  const onClickUrl = (url) => {
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': media.type,
+      },
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(
+          new Blob([blob]),
+        )
+
+        const link = document.createElement('a')
+        link.href = url
+        link.setAttribute(
+          'download',
+          media.name,
+        )
+
+        document.body.appendChild(link)
+        link.click()
+        link.parentNode.removeChild(link)
+      })
+  }
+
   return (
     <div className="flex flex-col p-1 justify-center">
       <div className="items-start p-3 border-b-2 border-[#333333]">
@@ -43,12 +69,12 @@ const File = ({ media }) => {
           Media Info
         </div>
         <div className="flex text-lg font-light text-orange-400">
-          Text title:
+          File name:
           <div className="pl-3 text-lg font-semibold text-[#ddd]">{media.name}</div>
         </div>
         <div className="flex text-lg font-light text-orange-400">
           File size:
-          <div className="pl-3 text-lg font-semibold text-[#ddd]">{byteSize(media.size).toString()}</div>
+          <div className="pl-3 text-lg font-light text-[#ddd]">{byteSize(media.size).toString()}</div>
         </div>
         <div className="flex text-lg font-light text-orange-400">
           Share:
@@ -62,6 +88,16 @@ const File = ({ media }) => {
               {copied ? 'URL copied' : 'Copy to clipboard'}
             </button>
           </div>
+        </div>
+        <div className="pt-2">
+          <a onClick={() => {
+            onClickUrl(media.content)
+          }}>
+            <button type="submit"
+              className="rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:bg-orange-800">
+              Download file
+            </button>
+          </a>
         </div>
       </div>
       <div className="bg-[#2b2b2b] my-3 p-3 font-mono whitespace-pre-wrap break-words">
