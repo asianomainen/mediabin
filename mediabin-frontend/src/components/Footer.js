@@ -12,9 +12,9 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-[#202020] text-center text-[#ddd] lg:text-left">
+    <footer className="bg-[#202020] border-t-2 border-[#2b2b2b] text-center text-[#ddd] lg:text-left">
       <div className="flex items-center justify-center">
-        <div className="mx-6 flex py-5 text-center md:text-left  max-w-7xl">
+        <div className="mx-6 flex pt-3 text-center md:text-left  max-w-7xl">
           <div className="grid-1 grid gap-8 md:grid-cols-3 lg:grid-cols-3">
 
             <div className="">
@@ -66,10 +66,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="border-t-2 border-[#2b2b2b] bg-[#202020] p-3 text-center">
-        <span>© 2022 Copyright:</span>
-        <div className="font-semibold text-white">Oskari Nuottonen</div>
       </div>
     </footer>
   )
