@@ -17,9 +17,7 @@ const File = ({ media }) => {
   }, [])
 
   if (!fileContent) {
-    return <div>
-      Loading...
-    </div>
+    return <div>Loading...</div>
   }
 
   const copyToClipboard = () => {
@@ -70,21 +68,21 @@ const File = ({ media }) => {
         </div>
         <div className="flex text-lg font-light text-orange-400">
           File name:
-          <div className="pl-3 text-lg font-semibold text-[#ddd]">{media.name}</div>
+          <div className="pl-3 font-semibold text-[#ddd]">{media.name}</div>
         </div>
         <div className="flex text-lg font-light text-orange-400">
           File size:
-          <div className="pl-3 text-lg font-light text-[#ddd]">{byteSize(media.size).toString()}</div>
+          <div className="pl-3 text-[#ddd]">{byteSize(media.size).toString()}</div>
         </div>
         <div className="flex text-lg font-light text-orange-400">
           Share:
-          <div className="flex pl-3 text-lg font-light text-[#ddd]"
+          <div className="flex pl-3 text-[#ddd]"
             onClick={copyToClipboard}>
             <div className="pr-3">
               {`https://mediabin.fly.dev/${media.id}`}
             </div>
             <button type="submit"
-              className={btnStyle + ' items-center w-28 rounded-lg bg-[#2b2b2b] text-center text-xs font-medium text-[#ddd] hover:bg-orange-800'}>
+              className={btnStyle + ' w-28 rounded-lg bg-[#2b2b2b] text-xs font-medium text-[#ddd] hover:bg-orange-800'}>
               {copied ? 'URL copied' : 'Copy to clipboard'}
             </button>
           </div>
