@@ -5,12 +5,18 @@ import { useState } from 'react'
 import mediaService from '../services/media'
 import { awsConfig } from '../utils/config'
 import { useNavigate } from 'react-router-dom'
+import UploadBar from './UploadBar'
 
 window.Buffer = window.Buffer || require('buffer').Buffer
 
 const FileUpload = () => {
   const [file, setFile] = useState()
   const [fileType, setFileType] = useState()
+  const [title, setTitle] = useState('')
+  const [url, setUrl] = useState('')
+  const [hidden, setHidden] = useState(false)
+  const [burnAfterRead, setBurnAfterRead] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate()
 
   const handleFileInput = (event) => {
@@ -30,18 +36,31 @@ const FileUpload = () => {
       const newMedia = await mediaService.createMedia({
         content: uploadedFile.location,
         type: fileType,
-        name: file.name,
-        size: fileToUpload.size
+        fileName: file.name,
+        size: fileToUpload.size,
+        title: title.trim().length === 0 ? 'Untitled' : title,
+        hidden: hidden,
+        burnAfterRead: burnAfterRead
       })
 
-      navigate(`/${newMedia.id}`, {
-        state: {
-          media: newMedia
-        }
-      })
+      setFile(null)
+      setTitle('')
+      setHidden(false)
+      setBurnAfterRead(false)
+
+      if (!burnAfterRead) {
+        navigate(`/${newMedia.id}`)
+      } else {
+        handleShowModal()
+        setUrl(`https://mediabin.fly.dev/${newMedia.id}`)
+      }
     } catch (e) {
       console.error(e)
     }
+  }
+
+  const handleShowModal = () => {
+    setShowModal(true)
   }
 
   return (
@@ -53,18 +72,15 @@ const FileUpload = () => {
             <div className="flex py-1 items-center space-x-6">
               <label className="block">
                 <input type="file"
-                  className="block cursor-pointer rounded-lg border border-[#403e3d] pr-5  text-sm text-[#ddd] file:mr-4 file:rounded-l file:border-0 file:bg-[#403e3d] file:py-2 file:px-4 file:text-sm file:font-semibold file:text-[#ddd] hover:file:bg-orange-800"
+                  className="block cursor-pointer rounded-lg border border-[#403e3d] pr-5 text-sm text-[#ddd] file:mr-4 file:rounded-l file:border-0 file:bg-[#403e3d] file:py-2 file:px-4 file:text-sm file:font-semibold file:text-[#ddd] hover:file:bg-orange-800"
                   onChange={handleFileInput} />
               </label>
             </div>
           </div>
-          <div className="flex items-center justify-between border-gray-600 px-3 py-2">
-            <button type="submit"
-              className="inline-flex items-center rounded-lg bg-[#2b2b2b] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:bg-orange-800">Create
-              new media
-            </button>
-          </div>
-        </div>
+
+          <UploadBar title={title} setTitle={setTitle} url={url} hidden={hidden} setHidden={setHidden}
+            burnAfterRead={burnAfterRead} setBurnAfterRead={setBurnAfterRead} showModal={showModal}
+            setShowModal={setShowModal} /></div>
       </form>
     </div>
   )

@@ -3,8 +3,11 @@ const mongoose = require('mongoose')
 const mediaSchema = new mongoose.Schema({
   content: mongoose.Schema.Types.Mixed,
   type: String,
-  name: String,
+  fileName: String,
   size: Number,
+  title: String,
+  hidden: Boolean,
+  burnAfterRead: Boolean
 })
 
 mediaSchema.set('toJSON', {
