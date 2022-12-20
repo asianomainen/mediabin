@@ -3,7 +3,7 @@ const Media = require('../models/mediabin')
 
 mediaRouter.get('/', async (request, response) => {
   const allMedia = await Media.find({})
-  const tenLatest = allMedia.reverse().slice(0, 10)
+  const tenLatest = allMedia.filter(media => media.hidden === false).reverse().slice(0, 10)
   response.json(tenLatest)
 })
 
@@ -29,9 +29,13 @@ mediaRouter.get('/:id', async (request, response, next) => {
     const foundMedia = await Media.findById(request.params.id)
 
     if (foundMedia) {
+      if (foundMedia.burnAfterRead) {
+        await Media.findByIdAndRemove(request.params.id)
+      }
+
       return response.json(foundMedia)
     } else {
-      return response.status(404).end()
+      return response.status(204).end()
     }
   } catch (error) {
     next(error)

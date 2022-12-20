@@ -1,9 +1,15 @@
 import mediaService from '../services/media'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import UploadBar from './UploadBar'
 
 const TextUpload = () => {
   const [textArea, setTextArea] = useState('')
+  const [title, setTitle] = useState('')
+  const [url, setUrl] = useState('')
+  const [hidden, setHidden] = useState(false)
+  const [burnAfterRead, setBurnAfterRead] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate()
 
   const handleTextChange = (event) => {
@@ -17,17 +23,24 @@ const TextUpload = () => {
       const newMedia = await mediaService.createMedia({
         content: textArea,
         type: 'text',
-        name: textArea.slice(0, 3)
+        title: title.trim().length === 0 ? 'Untitled' : title,
+        hidden: hidden,
+        burnAfterRead: burnAfterRead
       })
 
       setTextArea('')
-      navigate(`/${newMedia.id}`, {
-        state: {
-          media: newMedia
-        }
-      })
+      setTitle('')
+      setHidden(false)
+      setBurnAfterRead(false)
+
+      if (!burnAfterRead) {
+        navigate(`/${newMedia.id}`)
+      } else {
+        setShowModal(true)
+        setUrl(`https://mediabin.fly.dev/${newMedia.id}`)
+      }
     } catch (error) {
-      alert('Something went wrong')
+      console.error('Creating new media failed.')
     }
   }
 
@@ -45,12 +58,10 @@ const TextUpload = () => {
               onChange={handleTextChange}>
             </textarea>
           </div>
-          <div className="flex items-center justify-between px-3 py-2 border-gray-600">
-            <button type="submit"
-              className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-800">
-              Create new media
-            </button>
-          </div>
+
+          <UploadBar title={title} setTitle={setTitle} url={url} hidden={hidden} setHidden={setHidden}
+            burnAfterRead={burnAfterRead} setBurnAfterRead={setBurnAfterRead} showModal={showModal}
+            setShowModal={setShowModal} />
         </div>
       </form>
     </div>
