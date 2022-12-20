@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Header = () => {
   return (
     <header
-      className="flex py-5 items-center justify-center font-semibold text-2xl bg-[#202020] border-b-2 border-[#2b2b2b]">
+      className="flex py-2 md:py-5 items-center justify-center font-semibold text-2xl bg-[#202020] border-b-2 border-[#2b2b2b]">
       <div className="flex px-10">
         <div className="flex-shrink-0">
           <Link to="/"><img src={logo} alt={'Mediabin logo'} /></Link>

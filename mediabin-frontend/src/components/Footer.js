@@ -12,7 +12,11 @@ const Footer = () => {
   }
 
   return (
+<<<<<<< Updated upstream
     <footer className="bg-[#202020]gs border-t-2 border-[#2b2b2b] text-center text-[#ddd] lg:text-left">
+=======
+    <footer className="hidden md:block bg-[#202020] border-t-2 border-[#2b2b2b] text-center text-[#ddd] lg:text-left">
+>>>>>>> Stashed changes
       <div className="flex items-center justify-center">
         <div className="mx-6 flex pt-3 text-center md:text-left  max-w-7xl">
           <div className="grid-1 grid gap-8 md:grid-cols-3">
