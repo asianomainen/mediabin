@@ -3,6 +3,7 @@ import byteSize from 'byte-size'
 
 const File = ({ media }) => {
   const [fileContent, setFileContent] = useState('')
+  const [viewable, setViewable] = useState(true)
   const [copied, setCopied] = useState(false)
   const btnStyle = copied ? 'bg-orange-800 text-white' : ''
 
@@ -10,6 +11,11 @@ const File = ({ media }) => {
     const fetchFileContent = async () => {
       const fetchedContent = await fetch(media.content)
       const body = await fetchedContent.text()
+
+      if (body.indexOf('�') > -1) {
+        setViewable(false)
+      }
+
       setFileContent(body)
     }
 
@@ -99,7 +105,9 @@ const File = ({ media }) => {
         </div>
       </div>
       <div className="bg-[#2b2b2b] my-3 p-3 font-mono whitespace-pre-wrap break-words">
-        {fileContent}
+        {viewable
+          ? <div className="text-blue-300">{fileContent}</div>
+          : <div className="text-red-500">File could not be previewed. Please download file.</div>}
       </div>
     </div>
   )
