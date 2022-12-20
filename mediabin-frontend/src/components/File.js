@@ -54,7 +54,7 @@ const File = ({ media }) => {
 
       <div className="bg-[#2b2b2b] my-3 p-3 font-mono whitespace-pre-wrap break-words">
         {viewable
-          ? <div>{fileContent}</div>
+          ? <div>{fileContent ? fileContent : <p className="text-orange-400">File content loading...</p>}</div>
           : <div className="text-red-500">File could not be previewed. Please download file.</div>}
       </div>
     </div>
