@@ -21,17 +21,19 @@ const File = ({ media }) => {
   }
 
   const copyToClipboard = () => {
-    window.navigator.clipboard.writeText(`https://mediabin.fly.dev/${media.id}`).then(
-      () => {
-        setCopied(true)
-        setTimeout(() => {
-          setCopied(false)
-        }, 2000)
-      },
-      (error) => {
-        console.log('Could not copy URL', error.message)
-      }
-    )
+    window.navigator.clipboard
+      .writeText(`https://mediabin.fly.dev/${media.id}`)
+      .then(
+        () => {
+          setCopied(true)
+          setTimeout(() => {
+            setCopied(false)
+          }, 2000)
+        },
+        (error) => {
+          console.log('Could not copy URL', error.message)
+        }
+      )
   }
 
   const onClickUrl = (url) => {
@@ -43,7 +45,7 @@ const File = ({ media }) => {
     })
       .then((response) => response.blob())
       .then((blob) => {
-        const url = window.URL.createObjectURL(
+        const url = URL.createObjectURL(
           new Blob([blob]),
         )
 
@@ -51,12 +53,10 @@ const File = ({ media }) => {
         link.href = url
         link.setAttribute(
           'download',
-          media.name,
+          media.fileName,
         )
 
-        document.body.appendChild(link)
         link.click()
-        link.parentNode.removeChild(link)
       })
   }
 
