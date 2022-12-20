@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import mediaService from '../services/media'
 
-const Media = () => {
+const SingleMedia = () => {
   const [media, setMedia] = useState()
   const location = useLocation()
 
@@ -18,12 +18,22 @@ const Media = () => {
     fetchMedia().catch(console.error)
   }, [])
 
+  console.log(typeof media)
+
   if (!media) {
-    return (
-      <div>
-        Loading...
-      </div>
-    )
+    if (typeof media === 'undefined') {
+      return (
+        <div>
+          Loading...
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          Media not found
+        </div>
+      )
+    }
   }
 
   return (
@@ -38,4 +48,4 @@ const Media = () => {
   )
 }
 
-export default Media
+export default SingleMedia

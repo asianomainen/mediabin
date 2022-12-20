@@ -29,9 +29,13 @@ mediaRouter.get('/:id', async (request, response, next) => {
     const foundMedia = await Media.findById(request.params.id)
 
     if (foundMedia) {
+      if (foundMedia.burnAfterRead) {
+        await Media.findByIdAndRemove(request.params.id)
+      }
+
       return response.json(foundMedia)
     } else {
-      return response.status(404).end()
+      return response.status(204).end()
     }
   } catch (error) {
     next(error)

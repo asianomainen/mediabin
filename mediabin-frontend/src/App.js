@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 
 import mediaService from './services/media'
-import Media from './components/Media'
+import SingleMedia from './components/SingleMedia'
 import Menu from './components/Menu'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -31,7 +31,7 @@ const App = () => {
           <Routes>
             <Route>
               <Route path="/" element={<Menu />} />
-              <Route path="/:id" element={<Media />} />
+              <Route path="/:id" element={<SingleMedia />} />
             </Route>
           </Routes>
         </div>
