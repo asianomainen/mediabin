@@ -41,7 +41,7 @@ const Text = ({ media }) => {
               {`https://mediabin.fly.dev/${media.id}`}
             </div>
             <button type="submit"
-              className={btnStyle + ' w-28 rounded-lg bg-[#2b2b2b] text-xs font-medium text-[#ddd] hover:bg-orange-800'}>
+              className={btnStyle + ' w-28 rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] text-xs font-medium text-[#ddd] hover:bg-orange-800 hover:border-[#2b2b2b] ease-linear transition-all duration-150'}>
               {copied ? 'URL copied' : 'Copy to clipboard'}
             </button>
           </div>
