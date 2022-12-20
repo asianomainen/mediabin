@@ -30,20 +30,21 @@ const UploadBar = ({
   }
 
   return (
-    <div className="flex items-center justify-between px-3 py-2">
-      <div className="flex">
-        <div className="p-1 pr-2">
-          <label>Title / Name:</label>
-        </div>
-        <div>
-          <input className="mr-0 rounded-lg bg-[#2b2b2b] p-1 pl-2 focus:outline-none focus:ring-0"
-            placeholder="Untitled"
-            value={title}
-            onChange={handleTitleChange} />
+
+    <div className="flex-col md:flex md:flex-row items-center justify-between px-3 py-2">
+      <div className="flex-col md:flex md:flex-row">
+        <div className="flex items-center p-1 pr-0">
+          <label className="pr-2">Title:</label>
+          <div>
+            <input className="mr-0 rounded-lg bg-[#2b2b2b] p-1 pl-2 focus:outline-none focus:ring-0"
+              placeholder="Untitled"
+              value={title}
+              onChange={handleTitleChange} />
+          </div>
         </div>
 
-        <div className="p-1 pl-4">
-          <div className="border-l border-r border-dotted px-3 group relative inline-block">
+        <div className="flex items-center p-1 nd:pl-4">
+          <div className="md:border-l border-r border-dotted pr-3 md:px-3 group relative inline-block">
             <label className="pr-2">Hidden:</label>
             <input type="checkbox"
               className="w-4 accent-orange-800"
@@ -54,6 +55,7 @@ const UploadBar = ({
             >Hides your media from the &quot;Latest media&quot; list
             </span>
           </div>
+
           <div className="group pl-3 relative inline-block">
             <label className="pr-2">Burn after read:</label>
             <input type="checkbox"
@@ -62,16 +64,17 @@ const UploadBar = ({
               onChange={handleBurnAfterReadChange} />
             <span
               className="absolute left-12 -top-2 hidden w-48 -translate-y-full rounded-lg bg-[#202020] px-2 py-1 text-center text-sm text-[#ddd] after:absolute after:left-1/2 after:top-[100%] after:-translate-x-1/2 after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-[#202020] after:content-[''] group-hover:flex"
-            >Deletes the media after being viewed once
+            >Media is deleted after being viewed once
             </span>
           </div>
         </div>
       </div>
-
-      <button type="submit"
-        className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-800 ease-linear transition-all duration-150">
-        Create new media
-      </button>
+      <div>
+        <button type="submit"
+          className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-800 ease-linear transition-all duration-150">
+          Create new media
+        </button>
+      </div>
       <>
         {showModal ? (
           <>

@@ -9,8 +9,8 @@ const Header = () => {
         <div className="flex-shrink-0">
           <Link to="/"><img src={logo} alt={'Mediabin logo'} /></Link>
         </div>
-        <div className="hidden md:block px-10 pt-3">
-          The ultimate destination for storing and sharing all your digital content
+        <div className="hidden md:block md:text-center px-10 pt-3">
+          The ultimate destination for sharing all your digital content
         </div>
       </div>
     </header>
