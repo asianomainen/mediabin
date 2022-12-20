@@ -21,14 +21,14 @@ const SingleMedia = () => {
   if (!media) {
     if (typeof media === 'undefined') {
       return (
-        <div>
+        <div className="items-start p-3 border-b-2 border-[#333333] pb-3 font-semibold text-2xl">
           Loading...
         </div>
       )
     } else {
       return (
-        <div>
-          Media not found
+        <div className="items-start p-3 border-b-2 border-[#333333] pb-3 font-semibold text-2xl text-red-500">
+          Media has been deleted.
         </div>
       )
     }

@@ -20,10 +20,6 @@ const File = ({ media }) => {
     fetchFileContent().catch(console.error)
   }, [])
 
-  if (!fileContent) {
-    return <div>Loading...</div>
-  }
-
   const downLoadFile = (url) => {
     fetch(url, {
       method: 'GET',
