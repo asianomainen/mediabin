@@ -39,7 +39,8 @@ const FileUpload = () => {
         fileName: file.name,
         size: fileToUpload.size,
         title: title.trim().length === 0 ? 'Untitled' : title,
-        hidden: hidden
+        hidden: hidden,
+        burnAfterRead: burnAfterRead
       })
 
       setFile(null)
