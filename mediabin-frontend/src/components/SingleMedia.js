@@ -18,8 +18,6 @@ const SingleMedia = () => {
     fetchMedia().catch(console.error)
   }, [])
 
-  console.log(typeof media)
-
   if (!media) {
     if (typeof media === 'undefined') {
       return (
