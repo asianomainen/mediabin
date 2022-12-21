@@ -12,7 +12,8 @@ const UploadBar = ({
   syntaxHighlight,
   setSyntaxHighlight,
   showModal,
-  setShowModal
+  setShowModal,
+  uploading
 }) => {
   const [syntaxButtonText, setSyntaxButtonText] = useState('Syntax highlight')
 
@@ -96,10 +97,18 @@ const UploadBar = ({
         </div>
       </div>
       <div className="lg:pl-3">
-        <button type="submit"
-          className="inline-flex items-center py-2 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-400 hover:text-[#202020] ease-linear transition-all duration-150">
-          Create new media
-        </button>
+        {uploading
+          ? <div className="flex items-center pr-5">
+            <div className="pr-2">Loading</div>
+            <div
+              className="flex h-5 w-5 animate-spin items-center justify-center rounded-full bg-gradient-to-tr from-[#403e3d] to-orange-500">
+              <div className="h-3 w-3 rounded-full bg-[#403e3d]"></div>
+            </div>
+          </div>
+          : <button type="submit"
+            className="inline-flex items-center py-2 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-400 hover:text-[#202020] ease-linear transition-all duration-150">
+            Create new media
+          </button>}
       </div>
       <>
         {showModal ? (
