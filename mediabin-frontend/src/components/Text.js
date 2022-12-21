@@ -1,17 +1,12 @@
 import byteSize from 'byte-size'
 import { useEffect, useState } from 'react'
-import '../static/prism.css'
-import Prism from 'prismjs'
-import 'prismjs/plugins/toolbar/prism-toolbar.min'
-import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min'
-import 'prismjs/plugins/line-numbers/prism-line-numbers.min'
 
 const Text = ({ media }) => {
   const [copied, setCopied] = useState(false)
   const btnStyle = copied ? 'bg-orange-800 text-white' : ''
 
   useEffect(() => {
-    Prism.highlightAll()
+    window.Prism.highlightAll()
   }, [])
 
   const copyToClipboard = () => {
