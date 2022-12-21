@@ -1,3 +1,6 @@
+import SyntaxHighlightList from './SyntaxHighlightList'
+import { useState } from 'react'
+
 const UploadBar = ({
   title,
   setTitle,
@@ -6,9 +9,13 @@ const UploadBar = ({
   setHidden,
   burnAfterRead,
   setBurnAfterRead,
+  syntaxHighlight,
+  setSyntaxHighlight,
   showModal,
   setShowModal
 }) => {
+  const [syntaxButtonText, setSyntaxButtonText] = useState('Syntax highlight')
+
   const handleTitleChange = (event) => {
     setTitle(event.target.value)
   }
@@ -29,8 +36,14 @@ const UploadBar = ({
     }
   }
 
-  return (
+  const handleChooseSyntaxHighlight = (prismValue, text) => {
+    setSyntaxHighlight(prismValue)
+    setSyntaxButtonText(text)
+  }
 
+  console.log(syntaxHighlight)
+
+  return (
     <div className="flex-col md:flex md:flex-row items-center justify-between px-3 py-2">
       <div className="flex-col md:flex md:flex-row">
         <div className="flex items-center p-0 md:p-1 pr-0">
@@ -56,7 +69,7 @@ const UploadBar = ({
             </span>
           </div>
 
-          <div className="group pl-3 relative inline-block">
+          <div className="pr-3 pl-3 pr-3 relative inline-block">
             <label className="pr-2">Burn after read:</label>
             <input type="checkbox"
               className="w-4 accent-orange-800"
@@ -67,11 +80,21 @@ const UploadBar = ({
             >Media is deleted after being viewed once
             </span>
           </div>
+          <div className="dropdown relative inline-block border-l border-dotted pl-3 place-content-between">
+            <button type="button"
+              className="dropdown-button inline-flex w-40 items-center rounded-lg bg-[#2b2b2b] p-1 px-4 text-center text-xs font-medium text-[#ddd] hover:rounded-t-lg">
+              <span className="mr-1">{syntaxButtonText}</span>
+              <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </button>
+            <SyntaxHighlightList handleChooseSyntaxHighlight={handleChooseSyntaxHighlight} />
+          </div>
         </div>
       </div>
       <div>
         <button type="submit"
-          className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-800 ease-linear transition-all duration-150">
+          className="inline-flex items-center py-2 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-400 hover:text-[#202020] ease-linear transition-all duration-150">
           Create new media
         </button>
       </div>

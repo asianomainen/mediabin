@@ -1,9 +1,18 @@
 import byteSize from 'byte-size'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import '../static/prism.css'
+import Prism from 'prismjs'
+import 'prismjs/plugins/toolbar/prism-toolbar.min'
+import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min'
+import 'prismjs/plugins/line-numbers/prism-line-numbers.min'
 
 const Text = ({ media }) => {
   const [copied, setCopied] = useState(false)
   const btnStyle = copied ? 'bg-orange-800 text-white' : ''
+
+  useEffect(() => {
+    Prism.highlightAll()
+  }, [])
 
   const copyToClipboard = () => {
     window.navigator.clipboard.writeText(`https://mediabin.fly.dev/${media.id}`).then(
@@ -47,9 +56,11 @@ const Text = ({ media }) => {
           </div>
         </div>
       </div>
-      <div className="bg-[#2b2b2b] my-3 p-3 font-mono whitespace-pre-wrap break-words">
-        {media.content}
-      </div>
+      <pre className="line-numbers">
+        <code className={`language-${media.syntaxHighlight}`} data-prismjs-copy="Copy code">
+          {media.content}
+        </code>
+      </pre>
     </div>
   )
 }

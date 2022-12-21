@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    border-radius: 0 0 9px 9px;
+}
+
+.dropdown:hover .dropdown-button {
+    border-radius: 9px 9px 0 0;
+}
