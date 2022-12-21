@@ -7,7 +7,7 @@ const MediaInfo = ({ buttonText, media, onClickUrl }) => {
 
   const copyToClipboard = () => {
     window.navigator.clipboard
-      .writeText(`https://mediabin.fly.dev/${media.id}`)
+      .writeText(`https://mediabin.fly.dev/#/${media.id}`)
       .then(
         () => {
           setCopied(true)
@@ -44,7 +44,7 @@ const MediaInfo = ({ buttonText, media, onClickUrl }) => {
         <div className="flex pl-3 text-lg font-light text-[#ddd]"
           onClick={copyToClipboard}>
           <div className="pr-3">
-            {`https://mediabin.fly.dev/${media.id}`}
+            {`https://mediabin.fly.dev/#/${media.id}`}
           </div>
           <button type="submit"
             className={btnStyle + ' w-28 rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] text-xs font-medium text-[#ddd] hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150'}>

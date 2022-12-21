@@ -12,7 +12,7 @@
 # production
 /mediabin-frontend/build/
 /mediabin-backend/build/
-/mediabin-frontend/dist/
+/mediabin-frontend/public/dist/
 
 # misc
 .DS_Store

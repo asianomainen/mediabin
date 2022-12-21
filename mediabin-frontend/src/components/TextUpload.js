@@ -39,7 +39,7 @@ const TextUpload = () => {
         navigate(`/${newMedia.id}`)
       } else {
         setShowModal(true)
-        setUrl(`https://mediabin.fly.dev/${newMedia.id}`)
+        setUrl(`https://mediabin.fly.dev/#/${newMedia.id}`)
       }
     } catch (error) {
       console.error('Creating new media failed.')

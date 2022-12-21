@@ -55,7 +55,7 @@ const FileUpload = () => {
       } else {
         setUploading(false)
         handleShowModal()
-        setUrl(`https://mediabin.fly.dev/${newMedia.id}`)
+        setUrl(`https://mediabin.fly.dev/#/${newMedia.id}`)
       }
     } catch (e) {
       setUploading(false)
