@@ -17,6 +17,7 @@ const FileUpload = () => {
   const [hidden, setHidden] = useState(false)
   const [burnAfterRead, setBurnAfterRead] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const navigate = useNavigate()
 
   const handleFileInput = (event) => {
@@ -28,6 +29,8 @@ const FileUpload = () => {
     event.preventDefault()
 
     try {
+      setUploading(true)
+
       // Creates a copy of the file with a random name in order
       // not to overwrite existing files in AWS with the same name.
       const fileToUpload = new File([file], uuid())
@@ -49,12 +52,15 @@ const FileUpload = () => {
       setBurnAfterRead(false)
 
       if (!burnAfterRead) {
+        setUploading(false)
         navigate(`/${newMedia.id}`)
       } else {
+        setUploading(false)
         handleShowModal()
         setUrl(`https://mediabin.fly.dev/${newMedia.id}`)
       }
     } catch (e) {
+      setUploading(false)
       console.error(e)
     }
   }
@@ -80,7 +86,7 @@ const FileUpload = () => {
 
           <UploadBar title={title} setTitle={setTitle} url={url} hidden={hidden} setHidden={setHidden}
             burnAfterRead={burnAfterRead} setBurnAfterRead={setBurnAfterRead} showModal={showModal}
-            setShowModal={setShowModal} />
+            setShowModal={setShowModal} uploading={uploading} />
         </div>
       </form>
     </div>
