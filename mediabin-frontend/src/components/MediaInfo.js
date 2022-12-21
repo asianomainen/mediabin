@@ -14,9 +14,6 @@ const MediaInfo = ({ buttonText, media, onClickUrl }) => {
           setTimeout(() => {
             setCopied(false)
           }, 2000)
-        },
-        (error) => {
-          console.log('Could not copy URL', error.message)
         }
       )
   }

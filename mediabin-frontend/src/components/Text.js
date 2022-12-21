@@ -16,9 +16,6 @@ const Text = ({ media }) => {
         setTimeout(() => {
           setCopied(false)
         }, 2000)
-      },
-      (error) => {
-        console.log('Could not copy URL', error.message)
       }
     )
   }
