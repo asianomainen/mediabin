@@ -31,8 +31,6 @@ const FileUpload = () => {
     try {
       setUploading(true)
 
-      // Creates a copy of the file with a random name in order
-      // not to overwrite existing files in AWS with the same name.
       const fileToUpload = new File([file], uuid())
       const uploadedFile = await uploadFile(fileToUpload, awsConfig)
 

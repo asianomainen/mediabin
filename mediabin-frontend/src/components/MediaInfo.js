@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const MediaInfo = ({ buttonText, media, onClickUrl }) => {
   const [copied, setCopied] = useState(false)
-  const btnStyle = copied ? 'bg-orange-400 text-white' : ''
+  const btnStyle = copied ? 'bg-orange-400 text-[#202020]' : ''
 
   const copyToClipboard = () => {
     window.navigator.clipboard

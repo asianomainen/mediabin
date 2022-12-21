@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Text = ({ media }) => {
   const [copied, setCopied] = useState(false)
-  const btnStyle = copied ? 'bg-orange-800 text-white' : ''
+  const btnStyle = copied ? 'bg-orange-400 text-[#202020]' : ''
 
   useEffect(() => {
     window.Prism.highlightAll()
