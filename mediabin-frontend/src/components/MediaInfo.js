@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const MediaInfo = ({ buttonText, media, onClickUrl }) => {
   const [copied, setCopied] = useState(false)
-  const btnStyle = copied ? 'bg-orange-800 text-white' : ''
+  const btnStyle = copied ? 'bg-orange-400 text-white' : ''
 
   const copyToClipboard = () => {
     window.navigator.clipboard
@@ -47,15 +47,15 @@ const MediaInfo = ({ buttonText, media, onClickUrl }) => {
             {`https://mediabin.fly.dev/${media.id}`}
           </div>
           <button type="submit"
-            className={btnStyle + ' w-28 rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] text-xs font-medium text-[#ddd] hover:bg-orange-800 hover:border-[#2b2b2b] ease-linear transition-all duration-150'}>
-            {copied ? 'URL copied' : 'Copy to clipboard'}
+            className={btnStyle + ' w-28 rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] text-xs font-medium text-[#ddd] hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150'}>
+            {copied ? 'URL copied' : 'Copy share link'}
           </button>
         </div>
       </div>
       <div className="pt-2">
         <a onClick={onClickUrl(media.content)}>
           <button type="submit"
-            className="rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:border-[#2b2b2b] hover:bg-orange-800 ease-linear transition-all duration-150">
+            className="rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150">
             {buttonText}
           </button>
         </a>

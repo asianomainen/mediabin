@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import MediaInfo from './MediaInfo'
+import { Link } from 'react-router-dom'
 
 const File = ({ media }) => {
   const [fileContent, setFileContent] = useState('')
@@ -50,6 +51,13 @@ const File = ({ media }) => {
 
   return (
     <div className="flex flex-col p-1 justify-center">
+      <Link className="pl-3" to="/">
+        <button
+          className="items-center w-16 py-2 text-xs font-medium text-center border-2 border-[#403e3d] text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150">
+          Back
+        </button>
+      </Link>
+
       <MediaInfo buttonText={'Download file'} media={media} onClickUrl={onClickUrl} />
 
       <div className="bg-[#2b2b2b] my-3 p-3 font-mono whitespace-pre-wrap break-words">
