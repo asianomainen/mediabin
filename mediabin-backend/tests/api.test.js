@@ -1,3 +1,3 @@
 test('Empty test', () => {
-  expect(1).toBe(1)
+  expect('No tests yet :(').toBe('No tests yet :(')
 })
