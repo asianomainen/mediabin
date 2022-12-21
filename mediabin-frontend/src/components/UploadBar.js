@@ -13,7 +13,7 @@ const UploadBar = ({
   setSyntaxHighlight,
   showModal,
   setShowModal,
-  uploading
+  uploading,
 }) => {
   const [syntaxButtonText, setSyntaxButtonText] = useState('Syntax highlight')
 

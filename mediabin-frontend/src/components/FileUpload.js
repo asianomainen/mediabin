@@ -18,15 +18,24 @@ const FileUpload = () => {
   const [burnAfterRead, setBurnAfterRead] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [uploading, setUploading] = useState(false)
+  const [fileTooLarge, setFileTooLarge] = useState(false)
   const navigate = useNavigate()
 
   const handleFileInput = (event) => {
     setFile(event.target.files[0])
     setFileType(event.target.files[0].type)
+    setFileTooLarge(false)
   }
 
   const handleFileUpload = async (event) => {
     event.preventDefault()
+
+    if (file.size > 104857600) {
+      setFileTooLarge(true)
+      return
+    } else {
+      setFileTooLarge(false)
+    }
 
     try {
       setUploading(true)
@@ -50,13 +59,13 @@ const FileUpload = () => {
       setBurnAfterRead(false)
 
       if (!burnAfterRead) {
-        setUploading(false)
         navigate(`/${newMedia.id}`)
       } else {
-        setUploading(false)
         handleShowModal()
         setUrl(`https://mediabin.fly.dev/#/${newMedia.id}`)
       }
+
+      setUploading(false)
     } catch (e) {
       setUploading(false)
       console.error(e)
@@ -73,13 +82,14 @@ const FileUpload = () => {
         <div className="mb-4 w-full rounded-lg border border-[#403e3d] bg-[#403e3d]">
           <div className="flex rounded-t-lg bg-[#2b2b2b] px-3 py-2">
             <label htmlFor="text-media" className="sr-only"></label>
-            <div className="flex py-1 items-center space-x-6">
+            <div className="flex py-1 items-center space-x-3">
               <label className="block">
                 <input type="file"
                   className="block cursor-pointer rounded-lg border border-[#403e3d] pr-5 text-sm text-[#ddd] file:mr-4 file:rounded-l file:border-0 file:bg-[#403e3d] file:py-2 file:px-4 file:text-sm file:font-semibold file:text-[#ddd] hover:file:bg-orange-400 file:transition-all file:duration-150 file:ease-linear file:hover:text-[#202020]"
                   onChange={handleFileInput}
                   required />
               </label>
+              {fileTooLarge && <div className="text-red-500">File too large. Maximum file size is 100MB.</div>}
             </div>
           </div>
 
