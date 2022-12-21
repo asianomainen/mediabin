@@ -9,6 +9,10 @@ module.exports = {
         center: true,
       },
     },
+    screens: {
+      'md': '768px',
+      'lg': '1150px'
+    }
   },
   plugins: [],
 }

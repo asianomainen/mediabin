@@ -128,9 +128,6 @@ const SyntaxHighlightList = ({ handleChooseSyntaxHighlight }) => {
         onClick={() => handleChooseSyntaxHighlight('scala', 'Scala')}>Scala
       </li>
       <li className="whitespace-no-wrap block py-1 px-4 hover:bg-[#403e3d]"
-        onClick={() => handleChooseSyntaxHighlight('solidity', 'Solidity (Ethereum)')}>Solidity (Ethereum)
-      </li>
-      <li className="whitespace-no-wrap block py-1 px-4 hover:bg-[#403e3d]"
         onClick={() => handleChooseSyntaxHighlight('sql', 'SQL')}>SQL
       </li>
       <li className="whitespace-no-wrap block py-1 px-4 hover:bg-[#403e3d]"

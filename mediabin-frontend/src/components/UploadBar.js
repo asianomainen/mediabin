@@ -42,9 +42,9 @@ const UploadBar = ({
   }
 
   return (
-    <div className="flex-col md:flex md:flex-row items-center justify-between px-3 py-2">
-      <div className="flex-col md:flex md:flex-row">
-        <div className="flex items-center p-0 md:p-1 pr-0">
+    <div className="flex-col lg:flex lg:flex-row items-center justify-between px-3 py-2">
+      <div className="flex-col md:flex md:flex-row lg:flex lg:flex-row">
+        <div className="flex items-center p-0 lg:p-1 pr-0">
           <label className="pr-2">Title:</label>
           <div>
             <input className="mr-0 rounded-lg bg-[#2b2b2b] p-1 pl-2 focus:outline-none focus:ring-0"
@@ -62,12 +62,12 @@ const UploadBar = ({
               checked={hidden}
               onChange={handleHiddenChange} />
             <span
-              className="absolute -left-6 md:-left-3 -top-2 hidden w-48 -translate-y-full rounded-lg bg-[#202020] px-2 py-1 text-center text-sm text-[#ddd] after:absolute after:left-1/2 after:top-[100%] after:-translate-x-1/2 after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-[#202020] after:content-[''] group-hover:flex"
+              className="absolute -left-6 lg:-left-3 -top-2 hidden w-48 -translate-y-full rounded-lg bg-[#202020] px-2 py-1 text-center text-sm text-[#ddd] after:absolute after:left-1/2 after:top-[100%] after:-translate-x-1/2 after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-[#202020] after:content-[''] group-hover:flex"
             >Hides your media from the &quot;Latest media&quot; list
             </span>
           </div>
 
-          <div className="pr-3 pl-3 pr-3 relative inline-block">
+          <div className="md:border-l border-r border-dotted pr-3 px-3 group relative inline-block">
             <label className="pr-2">Burn after read:</label>
             <input type="checkbox"
               className="w-4 accent-orange-800"
@@ -78,21 +78,24 @@ const UploadBar = ({
             >Media is deleted after being viewed once
             </span>
           </div>
-          {syntaxHighlight &&
-            <div className="dropdown relative inline-block border-l border-dotted pl-3 place-content-between">
-              <button type="button"
-                className="dropdown-button inline-flex w-40 items-center rounded-lg bg-[#2b2b2b] p-1 px-4 text-center text-xs font-medium text-[#ddd] hover:rounded-t-lg">
-                <span className="mr-1">{syntaxButtonText}</span>
-                <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </button>
-              <SyntaxHighlightList handleChooseSyntaxHighlight={handleChooseSyntaxHighlight} />
-            </div>}
 
+          {syntaxHighlight &&
+            <div className="dropdown relative inline-block border-dotted pl-3 place-content-between">
+              <div>
+                <button type="button"
+                  className="dropdown-button inline-flex w-40 items-center rounded-lg bg-[#2b2b2b] p-1 px-4 text-center text-xs font-medium text-[#ddd] hover:rounded-t-lg">
+                  <span className="mr-1 basis-11/12 text-left">{syntaxButtonText}</span>
+                  <svg className="h-4 w-4 basis-1/12 fill-current" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </button>
+                <SyntaxHighlightList handleChooseSyntaxHighlight={handleChooseSyntaxHighlight} />
+              </div>
+            </div>}
         </div>
       </div>
-      <div>
+      <div className="lg:pl-3">
         <button type="submit"
           className="inline-flex items-center py-2 px-4 text-xs font-medium text-center text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-400 hover:text-[#202020] ease-linear transition-all duration-150">
           Create new media
