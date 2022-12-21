@@ -26,6 +26,12 @@ jobs:
       - name: lint
         working-directory: ./mediabin-backend
         run: npm run lint
+      - name: API test
+        working-directory: ./mediabin-backend
+        run: npm run test
       - name: build
         working-directory: ./mediabin-backend
         run: npm run build:ui
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: deploy to fly.io
+        run: fly deploy --remote-only
