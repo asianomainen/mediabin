@@ -1,5 +1,6 @@
 import byteSize from 'byte-size'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Text = ({ media }) => {
   const [copied, setCopied] = useState(false)
@@ -22,6 +23,13 @@ const Text = ({ media }) => {
 
   return (
     <div className="flex flex-col p-1 justify-center">
+      <Link className="pl-3" to="/">
+        <button
+          className="items-center w-16 py-2 text-xs font-medium text-center border-2 border-[#403e3d] text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150">
+          Back
+        </button>
+      </Link>
+
       <div className="items-start p-3 border-b-2 border-[#333333]">
         <div className="pb-3 font-semibold text-2xl">
           Media Info
@@ -42,12 +50,13 @@ const Text = ({ media }) => {
               {`https://mediabin.fly.dev/${media.id}`}
             </div>
             <button type="submit"
-              className={btnStyle + ' w-28 rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] text-xs font-medium text-[#ddd] hover:bg-orange-800 hover:border-[#2b2b2b] ease-linear transition-all duration-150'}>
-              {copied ? 'URL copied' : 'Copy to clipboard'}
+              className={btnStyle + ' w-28 rounded-lg bg-[#2b2b2b] border-2 border-[#403e3d] text-xs font-medium text-[#ddd] hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150'}>
+              {copied ? 'URL copied' : 'Copy share link'}
             </button>
           </div>
         </div>
       </div>
+
       <pre className="line-numbers">
         <code className={`language-${media.syntaxHighlight}`} data-prismjs-copy="Copy code">
           {media.content}
