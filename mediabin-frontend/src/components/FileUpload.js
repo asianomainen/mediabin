@@ -79,7 +79,8 @@ const FileUpload = () => {
               <label className="block">
                 <input type="file"
                   className="block cursor-pointer rounded-lg border border-[#403e3d] pr-5 text-sm text-[#ddd] file:mr-4 file:rounded-l file:border-0 file:bg-[#403e3d] file:py-2 file:px-4 file:text-sm file:font-semibold file:text-[#ddd] hover:file:bg-orange-400 file:transition-all file:duration-150 file:ease-linear file:hover:text-[#202020]"
-                  onChange={handleFileInput} />
+                  onChange={handleFileInput}
+                  required />
               </label>
             </div>
           </div>
