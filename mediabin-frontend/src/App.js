@@ -6,7 +6,7 @@ import SingleMedia from './components/SingleMedia'
 import Menu from './components/Menu'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import styles from './index.css'
+import styles from './static/index.css'
 
 export const MediaContext = createContext({})
 

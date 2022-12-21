@@ -7,7 +7,8 @@ const mediaSchema = new mongoose.Schema({
   size: Number,
   title: String,
   hidden: Boolean,
-  burnAfterRead: Boolean
+  burnAfterRead: Boolean,
+  syntaxHighlight: String
 })
 
 mediaSchema.set('toJSON', {

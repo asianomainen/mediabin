@@ -1,9 +1,13 @@
 import byteSize from 'byte-size'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Text = ({ media }) => {
   const [copied, setCopied] = useState(false)
   const btnStyle = copied ? 'bg-orange-800 text-white' : ''
+
+  useEffect(() => {
+    window.Prism.highlightAll()
+  }, [])
 
   const copyToClipboard = () => {
     window.navigator.clipboard.writeText(`https://mediabin.fly.dev/${media.id}`).then(
@@ -12,9 +16,6 @@ const Text = ({ media }) => {
         setTimeout(() => {
           setCopied(false)
         }, 2000)
-      },
-      (error) => {
-        console.log('Could not copy URL', error.message)
       }
     )
   }
@@ -47,9 +48,11 @@ const Text = ({ media }) => {
           </div>
         </div>
       </div>
-      <div className="bg-[#2b2b2b] my-3 p-3 font-mono whitespace-pre-wrap break-words">
-        {media.content}
-      </div>
+      <pre className="line-numbers">
+        <code className={`language-${media.syntaxHighlight}`} data-prismjs-copy="Copy code">
+          {media.content}
+        </code>
+      </pre>
     </div>
   )
 }

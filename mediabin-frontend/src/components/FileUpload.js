@@ -80,7 +80,8 @@ const FileUpload = () => {
 
           <UploadBar title={title} setTitle={setTitle} url={url} hidden={hidden} setHidden={setHidden}
             burnAfterRead={burnAfterRead} setBurnAfterRead={setBurnAfterRead} showModal={showModal}
-            setShowModal={setShowModal} /></div>
+            setShowModal={setShowModal} />
+        </div>
       </form>
     </div>
   )

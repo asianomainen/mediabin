@@ -7,6 +7,7 @@ const TextUpload = () => {
   const [textArea, setTextArea] = useState('')
   const [title, setTitle] = useState('')
   const [url, setUrl] = useState('')
+  const [syntaxHighlight, setSyntaxHighlight] = useState('null')
   const [hidden, setHidden] = useState(false)
   const [burnAfterRead, setBurnAfterRead] = useState(false)
   const [showModal, setShowModal] = useState(false)
@@ -25,7 +26,8 @@ const TextUpload = () => {
         type: 'text',
         title: title.trim().length === 0 ? 'Untitled' : title,
         hidden: hidden,
-        burnAfterRead: burnAfterRead
+        burnAfterRead: burnAfterRead,
+        syntaxHighlight: syntaxHighlight
       })
 
       setTextArea('')
@@ -60,7 +62,8 @@ const TextUpload = () => {
           </div>
 
           <UploadBar title={title} setTitle={setTitle} url={url} hidden={hidden} setHidden={setHidden}
-            burnAfterRead={burnAfterRead} setBurnAfterRead={setBurnAfterRead} showModal={showModal}
+            burnAfterRead={burnAfterRead} setBurnAfterRead={setBurnAfterRead} syntaxHighlight={syntaxHighlight}
+            setSyntaxHighlight={setSyntaxHighlight} showModal={showModal}
             setShowModal={setShowModal} />
         </div>
       </form>
