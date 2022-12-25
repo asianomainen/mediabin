@@ -15,7 +15,7 @@ const Image = ({ media }) => {
     <div className="flex flex-col p-1 justify-center">
       <Link className="pl-3" to="/">
         <button
-          className="items-center w-16 py-2 text-xs font-medium text-center border-2 border-[#403e3d] text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150">
+          className="items-center w-16 py-2 text-xs font-medium text-center border border-[#403e3d] text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150">
           Back
         </button>
       </Link>
