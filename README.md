@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Mediabin
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Mediabin project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Demo link
 
-In the project directory, you can run:
+Acces Mediabin at https://mediabin.fly.dev/
 
-### `npm start`
+## About the app
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Mediabin is essentially a [Pastebin](https://pastebin.com/) clone where, in addition to text, one can post files and images as well. Mediabin was created as a hobby project and is not intended for wide scale use.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Mediabin enables you to share text, files and images easily without having to create an account. By default all posts are public and the 10 latest posts will appear in the "Latest media" list. This can be opted out of by checking the "Hidden" box when uploading. 
 
-### `npm test`
+There is also a burn after reading function where the media is deleted permanently after it has been opened once.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Text posts can optionally be syntax highlighted with some of the most popular languges being available. 
 
-### `npm run build`
+## Screenshots
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Main page and text upload
+![Screenshot from 2022-12-25 15-48-14](https://user-images.githubusercontent.com/46067482/209470442-bbd326e6-e5f5-4aca-b00e-43c27b980e02.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### File/image upload
+![Screenshot from 2022-12-25 15-51-45](https://user-images.githubusercontent.com/46067482/209470493-f451a90c-8c7a-47dc-8b07-fcca7bf6e4a9.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Text post
+![Screenshot from 2022-12-25 15-49-32](https://user-images.githubusercontent.com/46067482/209470525-93b21e68-4dc0-442c-83dc-a217d6b9e64d.png)
 
-### `npm run eject`
+### Image post
+![Screenshot from 2022-12-25 15-49-02](https://user-images.githubusercontent.com/46067482/209470533-207cb08b-d73b-4a1a-b5b6-959268c3c0b3.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### File post
+![Screenshot from 2022-12-25 15-49-49](https://user-images.githubusercontent.com/46067482/209470537-b4a63de3-ddc5-4fdb-8035-3c830a3962a9.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+As this project was meant to be a learning experience for me, I chose to use some technologies I had not used before.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Front end:
+ - ReactJS
+ - Tailwind CSS (new to me)
+ 
+Back end:
+ - Node.js with Express
+ 
+Database:
+ - MongoDB with Mongoose
+ 
+File/image hosting:
+ - AWS S3 (new to me)
