@@ -12,7 +12,7 @@ mediaRouter.post('/', async (request, response) => {
   if (request.body.type === 'text') {
     media = new Media({
       ...request.body,
-      size: request.headers['content-length']
+      size: request.body.content.length
     })
   } else {
     media = new Media({
