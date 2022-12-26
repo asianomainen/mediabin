@@ -7,16 +7,32 @@ mediaRouter.get('/', async (request, response) => {
   response.json(tenLatest)
 })
 
-mediaRouter.post('/', async (request, response) => {
+mediaRouter.post('/', async (request, response, next) => {
+  if (request.body.content === undefined) {
+    return response.status(400).json({
+      error: 'content missing'
+    })
+  }
+
   let media
   if (request.body.type === 'text') {
     media = new Media({
       ...request.body,
-      size: request.body.content.length
+      size: request.body.content.length,
+      title: request.body.title === undefined
+        ? 'Untitled'
+        : request.body.title.trim().length === 0
+          ? 'Untitled'
+          : request.body.title
     })
   } else {
     media = new Media({
       ...request.body,
+      title: request.body.title === undefined
+        ? 'Untitled'
+        : request.body.title.trim().length === 0
+          ? 'Untitled'
+          : request.body.title
     })
   }
 
@@ -25,20 +41,16 @@ mediaRouter.post('/', async (request, response) => {
 })
 
 mediaRouter.get('/:id', async (request, response, next) => {
-  try {
-    const foundMedia = await Media.findById(request.params.id)
+  const foundMedia = await Media.findById(request.params.id)
 
-    if (foundMedia) {
-      if (foundMedia.burnAfterRead) {
-        await Media.findByIdAndRemove(request.params.id)
-      }
-
-      return response.json(foundMedia)
-    } else {
-      return response.status(204).end()
+  if (foundMedia) {
+    if (foundMedia.burnAfterRead) {
+      await Media.findByIdAndRemove(request.params.id)
     }
-  } catch (error) {
-    next(error)
+
+    return response.json(foundMedia)
+  } else {
+    return response.status(204).end()
   }
 })
 

@@ -9,7 +9,7 @@ module.exports = {
   'extends': 'eslint:recommended',
   'overrides': [],
   'parserOptions': {
-    'ecmaVersion': 'latest'
+    'ecmaVersion': 13
   },
   'rules': {
     'indent': [
