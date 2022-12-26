@@ -7,7 +7,7 @@ mediaRouter.get('/', async (request, response) => {
   response.json(tenLatest)
 })
 
-mediaRouter.post('/', async (request, response, next) => {
+mediaRouter.post('/', async (request, response) => {
   if (request.body.content === undefined) {
     return response.status(400).json({
       error: 'content missing'
@@ -40,7 +40,7 @@ mediaRouter.post('/', async (request, response, next) => {
   response.status(201).json(savedMedia)
 })
 
-mediaRouter.get('/:id', async (request, response, next) => {
+mediaRouter.get('/:id', async (request, response) => {
   const foundMedia = await Media.findById(request.params.id)
 
   if (foundMedia) {
