@@ -8,14 +8,11 @@ const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 const path = require('path')
-const { MongoMemoryServer } = require('mongodb-memory-server')
 
 logger.info('connecting to MongoDB')
 
 try {
-  if (process.env.NODE_ENV === 'test') {
-    MongoMemoryServer.create().then(mongoServer => mongoose.connect(mongoServer.getUri()))
-  } else {
+  if (process.env.NODE_ENV !== 'test') {
     mongoose.connect(process.env.MONGODB_URI)
   }
 
