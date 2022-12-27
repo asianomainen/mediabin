@@ -50,7 +50,7 @@ const initialMedia = [
 
 const mediaInDb = async () => {
   const media = await Media.find({})
-  return media.map(note => note.toJSON())
+  return media.map(media => media.toJSON())
 }
 
 module.exports = {
