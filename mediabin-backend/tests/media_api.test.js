@@ -16,6 +16,10 @@ beforeEach(async () => {
   }
 })
 
+afterAll(async () => {
+  await mongoose.connection.close()
+})
+
 describe('when there are initially five media in the db', () => {
   test('all visible media are returned', async () => {
     const response = await api.get('/api/all-media')
@@ -303,8 +307,4 @@ describe('burn after read media', () => {
 
     expect(secondResponse.body).toStrictEqual({})
   })
-})
-
-afterAll(() => {
-  mongoose.connection.close()
 })

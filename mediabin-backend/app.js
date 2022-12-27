@@ -1,4 +1,4 @@
-const config = require('./utils/config')
+require('dotenv').config()
 const express = require('express')
 require('express-async-errors')
 const app = express()
@@ -8,16 +8,21 @@ const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 const path = require('path')
+const { MongoMemoryServer } = require('mongodb-memory-server')
 
-logger.info('connecting to', config.MONGODB_URI)
+logger.info('connecting to MongoDB')
 
-mongoose.connect(config.MONGODB_URI)
-  .then(() => {
-    logger.info('connected to MongoDB')
-  })
-  .catch((error) => {
-    logger.error('error connecting to MongoDB:', error.message)
-  })
+try {
+  if (process.env.NODE_ENV === 'test') {
+    MongoMemoryServer.create().then(mongoServer => mongoose.connect(mongoServer.getUri()))
+  } else {
+    mongoose.connect(process.env.MONGODB_URI)
+  }
+
+  logger.info('connected to MongoDB')
+} catch (error) {
+  logger.error('error connecting to MongoDB:', error.message)
+}
 
 app.use(cors())
 app.use(express.static('build'))
