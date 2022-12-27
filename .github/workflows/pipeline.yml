@@ -36,7 +36,7 @@ jobs:
       - name: API test
         working-directory: ./mediabin-backend
         run: npm run test
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: build and deploy
-        uses: superfly/flyctl-actions/setup-flyctl@master
         working-directory: ./mediabin-backend
         run: npm run deploy:full
