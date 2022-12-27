@@ -20,10 +20,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.8.0
-        with:
-          mongodb-version: '5.0'
       - name: npm install back end
         working-directory: ./mediabin-backend
         run: npm install
