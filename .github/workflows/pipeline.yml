@@ -20,6 +20,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.8.0
+        with:
+          mongodb-version: '5.0'
       - name: npm install back end
         working-directory: ./mediabin-backend
         run: npm install
@@ -32,7 +36,7 @@ jobs:
       - name: API test
         working-directory: ./mediabin-backend
         run: npm run test
-      - name: build and deploy
         uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: build and deploy
         working-directory: ./mediabin-backend
         run: npm run deploy:full
