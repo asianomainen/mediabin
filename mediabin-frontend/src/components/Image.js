@@ -2,13 +2,9 @@ import MediaInfo from './MediaInfo'
 import { Link } from 'react-router-dom'
 
 const Image = ({ media }) => {
-  const openInNewTab = (event, url) => {
+  const openInNewTab = (url) => {
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
     if (newWindow) newWindow.opener = null
-  }
-
-  const onClickUrl = (url) => {
-    return () => openInNewTab(url)
   }
 
   return (
@@ -20,7 +16,7 @@ const Image = ({ media }) => {
         </button>
       </Link>
 
-      <MediaInfo buttonText={'Preview full size image'} media={media} onClickUrl={onClickUrl} />
+      <MediaInfo buttonText={'Preview full size image'} media={media} onClickButton={openInNewTab} />
 
       <div className="p-3 whitespace-pre-line">
         <img className="max-w-md drop-shadow-lg" src={media.content} alt={'Unknown upload by an unknown person'} />

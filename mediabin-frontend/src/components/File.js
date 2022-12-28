@@ -21,7 +21,7 @@ const File = ({ media }) => {
     fetchFileContent().catch(console.error)
   }, [])
 
-  const downLoadFile = (url) => {
+  const downloadFile = (url) => {
     fetch(url, {
       method: 'GET',
       headers: {
@@ -54,7 +54,7 @@ const File = ({ media }) => {
         </button>
       </Link>
 
-      <MediaInfo buttonText={'Download file'} media={media} downLoadFile={downLoadFile} />
+      <MediaInfo buttonText={'Download file'} media={media} onClickButton={downloadFile} />
 
       <div className="bg-[#2b2b2b] my-3 p-3 font-mono whitespace-pre-wrap break-words">
         {viewable

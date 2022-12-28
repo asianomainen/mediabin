@@ -17,10 +17,8 @@ const getOne = async (id) => {
   return response.data
 }
 
-const exportable = {
+export default {
   getAll,
   createMedia,
   getOne
 }
-
-export default exportable

@@ -1,7 +1,7 @@
 import byteSize from 'byte-size'
 import { useState } from 'react'
 
-const MediaInfo = ({ buttonText, media, downLoadFile }) => {
+const MediaInfo = ({ buttonText, media, onClickButton }) => {
   const [copied, setCopied] = useState(false)
   const btnStyle = copied ? 'bg-orange-400 text-[#202020]' : ''
 
@@ -53,7 +53,7 @@ const MediaInfo = ({ buttonText, media, downLoadFile }) => {
         </div>
       </div>
       <div className="pt-2">
-        <a onClick={() => downLoadFile(media.content)}>
+        <a onClick={() => onClickButton(media.content)}>
           <button type="submit"
             className="rounded-lg bg-[#2b2b2b] border border-[#403e3d] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150">
             {buttonText}

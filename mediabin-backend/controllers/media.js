@@ -17,6 +17,7 @@ mediaRouter.post('/', async (request, response) => {
   } else {
     media = new Media({
       ...request.body,
+      content: `https://mediabin-s3.s3.eu-north-1.amazonaws.com/${request.body.content}`
     })
   }
 
@@ -24,21 +25,17 @@ mediaRouter.post('/', async (request, response) => {
   response.status(201).json(savedMedia)
 })
 
-mediaRouter.get('/:id', async (request, response, next) => {
-  try {
-    const foundMedia = await Media.findById(request.params.id)
+mediaRouter.get('/:id', async (request, response) => {
+  const foundMedia = await Media.findById(request.params.id)
 
-    if (foundMedia) {
-      if (foundMedia.burnAfterRead) {
-        await Media.findByIdAndRemove(request.params.id)
-      }
-
-      return response.json(foundMedia)
-    } else {
-      return response.status(204).end()
+  if (foundMedia) {
+    if (foundMedia.burnAfterRead) {
+      await Media.findByIdAndRemove(request.params.id)
     }
-  } catch (error) {
-    next(error)
+
+    return response.json(foundMedia)
+  } else {
+    return response.status(204).end()
   }
 })
 
