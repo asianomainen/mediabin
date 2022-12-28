@@ -13,8 +13,10 @@ const path = require('path')
 logger.info('connecting to MongoDB')
 
 try {
-  if (process.env.NODE_ENV !== 'test') {
+  if (process.env.NODE_ENV === 'production') {
     mongoose.connect(process.env.MONGODB_URI)
+  } else if (process.env.NODE_ENV === 'development') {
+    mongoose.connect(process.env.DEV_MONGODB_URI)
   }
 
   logger.info('connected to MongoDB')
