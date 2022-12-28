@@ -8,16 +8,32 @@ mediaRouter.get('/', async (request, response) => {
 })
 
 mediaRouter.post('/', async (request, response) => {
+  if (request.body.content === undefined) {
+    return response.status(400).json({
+      error: 'content missing'
+    })
+  }
+
   let media
   if (request.body.type === 'text') {
     media = new Media({
       ...request.body,
-      size: request.headers['content-length']
+      size: request.body.content.length,
+      title: request.body.title === undefined
+        ? 'Untitled'
+        : request.body.title.trim().length === 0
+          ? 'Untitled'
+          : request.body.title
     })
   } else {
     media = new Media({
       ...request.body,
-      content: `https://mediabin-s3.s3.eu-north-1.amazonaws.com/${request.body.content}`
+      content: `https://mediabin-s3.s3.eu-north-1.amazonaws.com/${request.body.content}`,
+      title: request.body.title === undefined
+        ? 'Untitled'
+        : request.body.title.trim().length === 0
+          ? 'Untitled'
+          : request.body.title
     })
   }
 

@@ -24,7 +24,7 @@ const TextUpload = () => {
       const newMedia = await mediaService.createMedia({
         content: textArea,
         type: 'text',
-        title: title.trim().length === 0 ? 'Untitled' : title,
+        title: title,
         hidden: hidden,
         burnAfterRead: burnAfterRead,
         syntaxHighlight: syntaxHighlight
