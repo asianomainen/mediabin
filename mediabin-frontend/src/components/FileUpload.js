@@ -1,9 +1,7 @@
-import uuid from 'react-uuid'
-import { uploadFile } from 'react-s3'
 import { useState } from 'react'
 
 import mediaService from '../services/media'
-import { awsConfig } from '../utils/config'
+import preSignedUrlService from '../services/preSignedUrl'
 import { useNavigate } from 'react-router-dom'
 import UploadBar from './UploadBar'
 
@@ -11,7 +9,6 @@ window.Buffer = window.Buffer || require('buffer').Buffer
 
 const FileUpload = () => {
   const [file, setFile] = useState()
-  const [fileType, setFileType] = useState()
   const [title, setTitle] = useState('')
   const [url, setUrl] = useState('')
   const [hidden, setHidden] = useState(false)
@@ -23,7 +20,6 @@ const FileUpload = () => {
 
   const handleFileInput = (event) => {
     setFile(event.target.files[0])
-    setFileType(event.target.files[0].type)
     setFileTooLarge(false)
   }
 
@@ -40,14 +36,14 @@ const FileUpload = () => {
     try {
       setUploading(true)
 
-      const fileToUpload = new File([file], uuid())
-      const uploadedFile = await uploadFile(fileToUpload, awsConfig)
+      const { url, Key } = await preSignedUrlService.getPreSignedUrl(file.type)
+      await preSignedUrlService.uploadMedia(url, file)
 
       const newMedia = await mediaService.createMedia({
-        content: uploadedFile.location,
-        type: fileType,
+        content: Key,
+        type: file.type,
         fileName: file.name,
-        size: fileToUpload.size,
+        size: file.size,
         title: title.trim().length === 0 ? 'Untitled' : title,
         hidden: hidden,
         burnAfterRead: burnAfterRead

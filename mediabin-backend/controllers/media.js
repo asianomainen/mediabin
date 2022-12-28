@@ -28,6 +28,7 @@ mediaRouter.post('/', async (request, response) => {
   } else {
     media = new Media({
       ...request.body,
+      content: `https://mediabin-s3.s3.eu-north-1.amazonaws.com/${request.body.content}`,
       title: request.body.title === undefined
         ? 'Untitled'
         : request.body.title.trim().length === 0
