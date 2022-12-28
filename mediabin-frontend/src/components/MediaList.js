@@ -15,8 +15,11 @@ const MediaList = () => {
             <Link to={`/${media.id}`}
               className="text-lg text-orange-400">{media.title.length > 22 ? media.title.slice(0, 16).concat('...') : media.title}</Link>
             <div className="flex text-sm text-[#999]">
-              {media.type ? media.type :
-                <div className="text-sm text-red-500">
+              {media.type
+                ? media.type === 'text'
+                  ? media.type
+                  : media.type.split('/')[1]
+                : <div className="text-sm text-red-500">
                   unknown&nbsp;</div>
               } | {byteSize(media.size).toString()}
             </div>
