@@ -62,9 +62,9 @@ const FileUpload = () => {
       }
 
       setUploading(false)
-    } catch (e) {
+    } catch (error) {
       setUploading(false)
-      console.error(e)
+      console.error('File upload failed')
     }
   }
 

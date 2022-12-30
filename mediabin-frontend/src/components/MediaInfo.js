@@ -54,7 +54,8 @@ const MediaInfo = ({ buttonText, media, onClickButton }) => {
       </div>
       <div className="pt-2">
         <a onClick={() => onClickButton(media.content)}>
-          <button type="submit"
+          <button id="mediaInfoButton"
+            type="submit"
             className="rounded-lg bg-[#2b2b2b] border border-[#403e3d] py-2.5 px-4 text-center text-xs font-medium text-[#ddd] hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150">
             {buttonText}
           </button>
