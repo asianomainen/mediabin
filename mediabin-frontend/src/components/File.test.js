@@ -23,7 +23,7 @@ describe('File component', () => {
       expect(container.querySelector('#file')).toBeInTheDocument()
     })
 
-    const file = container.querySelector('#file')
+    const file = await container.querySelector('#file')
     expect(file).toBeDefined()
   })
 
@@ -44,7 +44,7 @@ describe('File component', () => {
       expect(container.querySelector('#no-preview')).toBeInTheDocument()
     })
 
-    const file = container.querySelector('#no-preview')
+    const file = await container.querySelector('#no-preview')
     expect(file).toBeDefined()
 
     const fileText = screen.getByText('File could not be previewed. Please download file.')
