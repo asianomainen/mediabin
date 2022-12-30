@@ -7,7 +7,7 @@ const SyntaxHighlightList = ({ handleChooseSyntaxHighlight }) => {
         className="text-gray-400 whitespace-no-wrap block py-1 px-4 hover:bg-[#403e3d] border-b-2 border-dotted border-[#403e3d]"
         onClick={() => handleChooseSyntaxHighlight('null', 'Syntax highlight')}>None
       </li>
-      <li className="whitespace-no-wrap block py-1 px-4 hover:bg-[#403e3d]"
+      <li id="syntaxHighlight" className="whitespace-no-wrap block py-1 px-4 hover:bg-[#403e3d]"
         onClick={() => handleChooseSyntaxHighlight('arduino', 'Arduino')}>Arduino
       </li>
       <li className="whitespace-no-wrap block py-1 px-4 hover:bg-[#403e3d]"

@@ -2,7 +2,7 @@ import Image from './Image'
 import Text from './Text'
 import File from './File'
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import mediaService from '../services/media'
 
 const SingleMedia = () => {
@@ -35,11 +35,17 @@ const SingleMedia = () => {
   }
 
   return (
-    <div>
+    <div className="pt-1">
+      <Link className="pl-4" to="/">
+        <button
+          className="items-center w-16 py-2 text-xs font-medium text-center border border-[#403e3d] text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150">
+          Back
+        </button>
+      </Link>
       {media.type.split('/')[0] === 'image'
         ? <Image media={media} />
         : media.type === 'text'
-          ? <Text media={media} />
+          ? <Text id="single-text" media={media} />
           : <File media={media} />
       }
     </div>

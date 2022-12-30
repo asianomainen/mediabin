@@ -1,13 +1,16 @@
 import byteSize from 'byte-size'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 const Text = ({ media }) => {
   const [copied, setCopied] = useState(false)
   const btnStyle = copied ? 'bg-orange-400 text-[#202020]' : ''
 
   useEffect(() => {
-    window.Prism.highlightAll()
+    try {
+      window.Prism.highlightAll()
+    } catch (error) {
+      console.error('Could not highlight text')
+    }
   }, [])
 
   const copyToClipboard = () => {
@@ -22,14 +25,7 @@ const Text = ({ media }) => {
   }
 
   return (
-    <div className="flex flex-col p-1 justify-center">
-      <Link className="pl-3" to="/">
-        <button
-          className="items-center w-16 py-2 text-xs font-medium text-center border border-[#403e3d] text-[#ddd] bg-[#2b2b2b] rounded-lg hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150">
-          Back
-        </button>
-      </Link>
-
+    <div className="flex-col pl-1 justify-center">
       <div className="items-start p-3 border-b-2 border-[#333333]">
         <div className="pb-3 font-semibold text-2xl">
           Media Info
@@ -58,7 +54,7 @@ const Text = ({ media }) => {
       </div>
 
       <pre className="line-numbers">
-        <code className={`language-${media.syntaxHighlight}`} data-prismjs-copy="Copy code">
+        <code id="code" className={`language-${media.syntaxHighlight}`} data-prismjs-copy="Copy code">
           {media.content}
         </code>
       </pre>

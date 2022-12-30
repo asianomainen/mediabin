@@ -48,7 +48,8 @@ const UploadBar = ({
         <div className="flex items-center p-0 lg:p-1 pr-0">
           <label className="pr-2">Title:</label>
           <div>
-            <input className="mr-0 rounded-lg bg-[#2b2b2b] p-1 pl-2 focus:outline-none focus:ring-0"
+            <input id="title"
+              className="mr-0 rounded-lg bg-[#2b2b2b] p-1 pl-2 focus:outline-none focus:ring-0"
               placeholder="Untitled"
               value={title}
               onChange={handleTitleChange} />
@@ -58,7 +59,8 @@ const UploadBar = ({
         <div className="flex items-center py-3 md:pl-4">
           <div className="md:border-l border-r border-dotted pr-3 md:px-3 group relative inline-block">
             <label className="pr-2">Hidden:</label>
-            <input type="checkbox"
+            <input id="hidden"
+              type="checkbox"
               className="w-4 accent-orange-400"
               checked={hidden}
               onChange={handleHiddenChange} />
@@ -70,7 +72,8 @@ const UploadBar = ({
 
           <div className="border-r border-dotted pr-3 px-3 group relative inline-block">
             <label className="pr-2">Burn after read:</label>
-            <input type="checkbox"
+            <input id="burnAfterRead"
+              type="checkbox"
               className="w-4 accent-orange-400"
               checked={burnAfterRead}
               onChange={handleBurnAfterReadChange} />
@@ -83,7 +86,8 @@ const UploadBar = ({
           {syntaxHighlight &&
             <div className="dropdown relative inline-block border-dotted pl-3 place-content-between">
               <div>
-                <button type="button"
+                <button id="syntaxButton"
+                  type="button"
                   className="dropdown-button inline-flex w-40 items-center rounded-lg bg-[#2b2b2b] p-1 px-4 text-center text-xs font-medium text-[#ddd] hover:rounded-t-lg">
                   <span className="mr-1 basis-11/12 text-left">{syntaxButtonText}</span>
                   <svg className="h-4 w-4 basis-1/12 fill-current" xmlns="http://www.w3.org/2000/svg"

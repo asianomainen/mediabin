@@ -51,8 +51,7 @@ const TextUpload = () => {
       <form onSubmit={handleTextSubmit}>
         <div className="w-full mb-4 border rounded-lg bg-[#403e3d] border-[#403e3d]">
           <div className="px-4 py-2 rounded-t-lg bg-[#2b2b2b]">
-            <label htmlFor="text-media" className="sr-only"></label>
-            <textarea id="text" rows="15"
+            <textarea id="textarea" rows="15"
               className="w-full px-0 text-sm text-[#ddd] bg-[#2b2b2b] focus:ring-0 focus:outline-none placeholder-[#ddd]"
               required
               placeholder="Write your text here..."
