@@ -29,11 +29,11 @@ describe('File component', () => {
 
   test('renders correct text when file cannot be previewed', async () => {
     const media = {
-      content: 'https://mediabin-s3.s3.eu-north-1.amazonaws.com/8f73f406-e1a2-47b9-821a-5ba7c6cf7c69.mp4',
-      type: 'video/mp4',
-      fileName: '439675d98e9529b5.mp4',
-      size: 3472887,
-      title: 'feels',
+      content: 'https://mediabin-s3.s3.eu-north-1.amazonaws.com/bc603900-55a6-4483-a1f1-efc56c2d6f6e.vnd.oasis.opendocument.text',
+      type: 'application/vnd.oasis.opendocument.text',
+      fileName: 'cyberproject.odt',
+      size: 11648,
+      title: 'CYBER',
       hidden: false,
       burnAfterRead: false,
     }
