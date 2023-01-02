@@ -21,9 +21,9 @@ const MediaUpload = () => {
               Text</label>
           </div>
           <div className="flex items-center mr-4">
-            <input id="file-radio" type="radio" value="File" name="inline-radio-group"
+            <input id="file" type="radio" value="File" name="inline-radio-group"
               className="w-4 h-4 focus:ring-orange-400 accent-orange-400" />
-            <label htmlFor="text" className="ml-2 text-sm font-medium">
+            <label htmlFor="file" className="ml-2 text-sm font-medium">
               File</label>
           </div>
         </div>

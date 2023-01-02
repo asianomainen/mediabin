@@ -45,7 +45,8 @@ const Text = ({ media }) => {
             <div className="pr-3">
               {`https://mediabin.fly.dev/#/${media.id}`}
             </div>
-            <button type="submit"
+            <button id="copyTextUrl"
+              type="submit"
               className={btnStyle + ' w-28 rounded-lg bg-[#2b2b2b] border border-[#403e3d] text-xs font-medium text-[#ddd] hover:bg-orange-400 hover:border-[#2b2b2b] hover:text-[#202020] ease-linear transition-all duration-150'}>
               {copied ? 'URL copied' : 'Copy share link'}
             </button>
