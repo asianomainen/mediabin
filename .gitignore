@@ -8,6 +8,8 @@
 
 # testing
 /mediabin-frontend/coverage/
+/mediabin-backend/tests/cypress/screenshots/
+/mediabin-backend/tests/cypress/videos/
 
 # production
 /mediabin-frontend/build/
