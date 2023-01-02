@@ -37,7 +37,6 @@ jobs:
         run: CI=true npm test
       - name: e2e tests
         uses: cypress-io/github-action@v4
-        working-directory: ./mediabin-backend
         with:
           build: npm run build:ui
           start: npm run start:test
