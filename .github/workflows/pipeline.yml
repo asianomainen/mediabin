@@ -41,6 +41,7 @@ jobs:
           working-directory: ./mediabin-backend
           build: npm run build:ui
           start: npm run start:test, npm run start:ui
+          config-file: tests/cypress.config.js
           wait-on: http://localhost:3000
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: build and deploy
