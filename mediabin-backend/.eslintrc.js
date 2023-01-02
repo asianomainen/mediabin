@@ -5,6 +5,7 @@ module.exports = {
     'es2021': true,
     'node': true,
     'jest': true,
+    'cypress/globals': true
   },
   'extends': 'eslint:recommended',
   'overrides': [],
@@ -37,5 +38,8 @@ module.exports = {
       'error', { 'before': true, 'after': true }
     ],
     'no-console': 0
-  }
+  },
+  'plugins': [
+    'cypress'
+  ]
 }

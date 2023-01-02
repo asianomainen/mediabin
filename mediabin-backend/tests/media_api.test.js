@@ -1,18 +1,11 @@
 const mongoose = require('mongoose')
 const supertest = require('supertest')
-const { MongoMemoryServer } = require('mongodb-memory-server')
 const app = require('../app')
 
 const api = supertest(app)
 
 const Media = require('../models/mediabin')
 const helper = require('./media_api_helper')
-
-beforeAll(async () => {
-  const mongodb = await MongoMemoryServer.create()
-  const uri = mongodb.getUri()
-  mongoose.connect(uri)
-})
 
 beforeEach(async () => {
   await Media.deleteMany({})
