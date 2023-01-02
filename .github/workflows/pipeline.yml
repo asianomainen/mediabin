@@ -40,7 +40,7 @@ jobs:
         with:
           working-directory: ./mediabin-backend
           build: npm run build:ui
-          start: npm run start
+          start: npm run start:test, npm run start:ui
           wait-on: http://localhost:3000
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: build and deploy
