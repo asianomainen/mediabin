@@ -35,10 +35,10 @@ jobs:
       - name: Front end unit test
         working-directory: ./mediabin-frontend
         run: CI=true npm test
-      - uses: cypress-io/github-action@v4
       - name: e2e tests
-        working-directory: ./mediabin-backend
+        uses: cypress-io/github-action@v5
         with:
+          working-directory: ./mediabin-backend
           build: npm run build:ui
           start: npm run start:test
           wait-on: http://localhost:3000
