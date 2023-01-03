@@ -38,14 +38,13 @@ jobs:
         working-directory: ./mediabin-backend
         run: npm run build:ui
       - name: e2e tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v2
         with:
           working-directory: ./mediabin-backend
           project: ./tests
-          build: npm run build:ui
-          start: npm run start:test, npm run start:ui
-          wait-on: 'http://localhost:3000'
           command: npm run cypress
+          start: npm run start:test
+          wait-on: 'http://localhost:8080'
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: build and deploy
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
