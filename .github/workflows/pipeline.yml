@@ -35,6 +35,7 @@ jobs:
         working-directory: ./mediabin-frontend
         run: CI=true npm test
       - name: build ui
+        working-directory: ./mediabin-backend
         run: npm run build:ui
       - name: ls
         run: ls
