@@ -19,6 +19,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
+          run: |
+            cd mediabin-backend
+            npm run start:test ?
       - name: npm install back end
         working-directory: ./mediabin-backend
         run: npm install
@@ -38,9 +41,9 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           working-directory: ./mediabin-backend
-          build: npm run build
-          start: npm run start:test
-          wait-on: 'http://localhost:8080'
+          build: npm run build:ui
+          start: npm run start:ui
+          wait-on: 'http://localhost:3000'
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: build and deploy
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
