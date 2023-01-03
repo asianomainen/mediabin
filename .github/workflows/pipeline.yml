@@ -34,12 +34,14 @@ jobs:
       - name: Front end unit test
         working-directory: ./mediabin-frontend
         run: CI=true npm test
+      - name: build
+        run: npm run build:ui
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
           working-directory: ./mediabin-backend
           project: ./tests
-          build: npm run build:ui
+          command: npm run cypress
           start: npm run start:test
           wait-on: 'http://localhost:8080'
       - uses: superfly/flyctl-actions/setup-flyctl@master
