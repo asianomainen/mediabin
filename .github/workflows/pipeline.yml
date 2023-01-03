@@ -12,7 +12,7 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
-  deployment_pipeline:
+  set_up_and_test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -41,9 +41,11 @@ jobs:
           project: ./tests
           build: npm run build:ui
           start: npm run start:test, npm run start:ui
-          wait-on: http://localhost:3000
+          wait-on: 'http://localhost:3000, http://localhost:8080'
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: build and deploy
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
         working-directory: ./mediabin-backend
         run: npm run deploy:full
+
+  deploy_to_fly:
