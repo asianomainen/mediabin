@@ -1,6 +1,6 @@
 describe('Mediabin', function () {
   beforeEach(function () {
-    cy.visit('http://127.0.0.1:8080')
+    cy.visit('http://127.0.0.1:8000')
   })
 
   it('front page can be opened', function () {

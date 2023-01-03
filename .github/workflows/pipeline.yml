@@ -42,7 +42,7 @@ jobs:
           working-directory: ./mediabin-backend
           build: npm run build:ui
           start: npm run start:test
-          wait-on: 'http://127.0.0.1:8080'
+          wait-on: 'http://127.0.0.1:8000'
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: build and deploy
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
