@@ -45,6 +45,7 @@ jobs:
           build: npm run build:ui
           start: npm run start:test
           wait-on: 'http://localhost:8080'
+          command: npm run cypress
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: build and deploy
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
