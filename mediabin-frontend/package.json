@@ -1,13 +1,11 @@
 {
-  "name": "notes",
+  "name": "mediabin-frontend",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "aws-sdk": "^2.1282.0",
     "axios": "^0.27.2",
     "buffer": "^6.0.3",
     "byte-size": "^8.1.0",
-    "mongodb-memory-server": "^8.10.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.5.0",
@@ -20,8 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!byte-size)/\"",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
-    "build-css": "tailwindcss build -i ./public/styles.css css/styles.css"
+    "lint": "eslint ."
   },
   "proxy": "http://localhost:8080",
   "eslintConfig": {

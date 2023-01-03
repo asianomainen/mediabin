@@ -8,7 +8,6 @@ module.exports = {
     'cypress/globals': true
   },
   'extends': 'eslint:recommended',
-  'overrides': [],
   'parserOptions': {
     'ecmaVersion': 13
   },

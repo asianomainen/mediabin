@@ -1,6 +1,6 @@
 describe('Mediabin', function () {
   beforeEach(function () {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:8080')
   })
 
   it('front page can be opened', function () {
@@ -110,7 +110,7 @@ describe('Mediabin', function () {
     })
 
     it('can be made with a title', function () {
-      cy.get('input[type=file]').selectFile('text_file')
+      cy.get('input[type=file]').selectFile('./cypress/text_file')
       cy.get('#title').type('File post title')
       cy.contains('Create new media').click()
       cy.contains('Media Info')
@@ -118,7 +118,7 @@ describe('Mediabin', function () {
     })
 
     it('can be made without a title', function () {
-      cy.get('input[type=file]').selectFile('text_file')
+      cy.get('input[type=file]').selectFile('./cypress/text_file')
       cy.contains('Create new media').click()
       cy.contains('Media Info')
       cy.contains('Untitled')
@@ -130,7 +130,7 @@ describe('Mediabin', function () {
     })
 
     it('can be made as hidden', function () {
-      cy.get('input[type=file]').selectFile('text_file')
+      cy.get('input[type=file]').selectFile('./cypress/text_file')
       cy.get('#title').type('Hidden file post title')
       cy.get('#hidden').click()
       cy.contains('Create new media').click()
@@ -140,7 +140,7 @@ describe('Mediabin', function () {
     })
 
     it('can be made as burn after read', function () {
-      cy.get('input[type=file]').selectFile('text_file')
+      cy.get('input[type=file]').selectFile('./cypress/text_file')
       cy.get('#title').type('Burn after read file post title')
       cy.get('#burnAfterRead').click()
       cy.contains('Create new media').click()
@@ -148,7 +148,7 @@ describe('Mediabin', function () {
     })
 
     it('copy share link button works', function () {
-      cy.get('input[type=file]').selectFile('text_file')
+      cy.get('input[type=file]').selectFile('./cypress/text_file')
       cy.get('#title').type('File post title')
       cy.contains('Create new media').click()
       cy.contains('Media Info')
@@ -174,7 +174,7 @@ describe('Mediabin', function () {
     })
 
     it('renders a previewable file', function () {
-      cy.get('input[type=file]').selectFile('text_file')
+      cy.get('input[type=file]').selectFile('./cypress/text_file')
       cy.get('#title').type('Previewable post title')
       cy.contains('Create new media').click()
       cy.contains('Media Info')
@@ -183,7 +183,7 @@ describe('Mediabin', function () {
     })
 
     it('does not render an unpreviewable file', function () {
-      cy.get('input[type=file]').selectFile('pdf_file.pdf')
+      cy.get('input[type=file]').selectFile('./cypress/pdf_file.pdf')
       cy.get('#title').type('Unpreviewable post title')
       cy.contains('Create new media').click()
       cy.contains('Media Info')
@@ -192,7 +192,7 @@ describe('Mediabin', function () {
     })
 
     it('renders an image', function () {
-      cy.get('input[type=file]').selectFile('image_file.jpg')
+      cy.get('input[type=file]').selectFile('./cypress/image_file.jpg')
       cy.get('#title').type('Image title')
       cy.contains('Create new media').click()
       cy.contains('Media Info')

@@ -8,13 +8,12 @@
 
 # testing
 /mediabin-frontend/coverage/
-/mediabin-backend/tests/cypress/screenshots/
-/mediabin-backend/tests/cypress/videos/
+/mediabin-backend/cypress/screenshots/
+/mediabin-backend/cypress/videos/
 
 # production
 /mediabin-frontend/build/
 /mediabin-backend/build/
-/mediabin-frontend/public/dist/
 
 # misc
 .DS_Store
