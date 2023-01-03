@@ -47,5 +47,3 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
         working-directory: ./mediabin-backend
         run: npm run deploy:full
-
-  deploy_to_fly:
