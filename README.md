@@ -6,6 +6,10 @@ Mediabin project was bootstrapped with [Create React App](https://github.com/fac
 
 Acces Mediabin at https://mediabin.fly.dev/
 
+## Timesheet
+
+[Link to timesheet](timesheet.md)
+
 ## About the app
 
 Mediabin is essentially a [Pastebin](https://pastebin.com/) clone where, in addition to text, one can post files and images as well. Mediabin was created as a hobby project and is not intended for wide scale use.
