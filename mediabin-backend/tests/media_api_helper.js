@@ -44,8 +44,8 @@ const initialMedia = [
     burnAfterRead: false,
     syntaxHighlight: 'null',
   }
-]
+];
 
 module.exports = {
   initialMedia
-}
+};

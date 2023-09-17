@@ -1,71 +1,71 @@
-const mongoose = require('mongoose')
-const { MongoMemoryServer } = require('mongodb-memory-server')
-const supertest = require('supertest')
-const app = require('../app')
+const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
+const supertest = require('supertest');
+const app = require('../app');
 
-const api = supertest(app)
+const api = supertest(app);
 
-const Media = require('../models/mediabin')
-const helper = require('./media_api_helper')
+const Media = require('../models/mediabin');
+const helper = require('./media_api_helper');
 
 beforeAll(async () => {
-  const mongodb = await MongoMemoryServer.create()
-  const uri = mongodb.getUri()
-  mongoose.connect(uri)
-})
+  const mongodb = await MongoMemoryServer.create();
+  const uri = mongodb.getUri();
+  mongoose.connect(uri);
+});
 
 beforeEach(async () => {
-  await Media.deleteMany({})
+  await Media.deleteMany({});
 
   for (let media of helper.initialMedia) {
-    let noteObject = new Media(media)
-    await noteObject.save()
+    let noteObject = new Media(media);
+    await noteObject.save();
   }
-})
+});
 
 afterAll(() => {
-  mongoose.connection.close()
-})
+  mongoose.connection.close();
+});
 
 describe('when there are initially five media in the db', () => {
   test('all visible media are returned', async () => {
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    expect(response.body).toHaveLength(helper.initialMedia.length)
-  })
+    expect(response.body).toHaveLength(helper.initialMedia.length);
+  });
 
   test('all media are returned as json', async () => {
     await api
       .get('/api/all-media')
       .expect(200)
-      .expect('Content-Type', /application\/json/)
-  })
+      .expect('Content-Type', /application\/json/);
+  });
 
   test('all five uploaded media are returned', async () => {
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    expect(response.body).toHaveLength(5)
-  })
+    expect(response.body).toHaveLength(5);
+  });
 
   test('the first media is a text upload', async () => {
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    expect(response.body[4].type).toBe('text')
-  })
+    expect(response.body[4].type).toBe('text');
+  });
 
   test('the first media content is correct', async () => {
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    expect(response.body[4].content).toBe('Sukulaku is best!')
-  })
+    expect(response.body[4].content).toBe('Sukulaku is best!');
+  });
 
   test('a specific media is within the returned media', async () => {
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    const contents = response.body.map(response => response.content)
-    expect(contents).toContain('VERY LONG TITLE')
-  })
-})
+    const contents = response.body.map(response => response.content);
+    expect(contents).toContain('VERY LONG TITLE');
+  });
+});
 
 describe('uploading a new text media', () => {
   test('succeeds with status code 201 when media is valid', async () => {
@@ -77,23 +77,23 @@ describe('uploading a new text media', () => {
       'hidden': false,
       'burnAfterRead': false,
       'syntaxHighlight': 'null',
-    }
+    };
 
     await api
       .post('/api/all-media')
       .send(newMedia)
       .expect(201)
-      .expect('Content-Type', /application\/json/)
+      .expect('Content-Type', /application\/json/);
 
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    const contents = response.body.map(response => response.content)
+    const contents = response.body.map(response => response.content);
 
-    expect(response.body).toHaveLength(helper.initialMedia.length + 1)
+    expect(response.body).toHaveLength(helper.initialMedia.length + 1);
     expect(contents).toContain(
       'A nice new text upload'
-    )
-  })
+    );
+  });
 
   test('fails with status code 400 when media has no content', async () => {
     const newMedia = {
@@ -103,18 +103,18 @@ describe('uploading a new text media', () => {
       'hidden': false,
       'burnAfterRead': false,
       'syntaxHighlight': 'null',
-    }
+    };
 
     await api
       .post('/api/all-media')
       .send(newMedia)
       .expect(400)
-      .expect('Content-Type', /application\/json/)
+      .expect('Content-Type', /application\/json/);
 
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    expect(response.body).toHaveLength(helper.initialMedia.length)
-  })
+    expect(response.body).toHaveLength(helper.initialMedia.length);
+  });
 
   test('title is set as Untitled if no title is given', async () => {
     const newMedia = {
@@ -125,24 +125,24 @@ describe('uploading a new text media', () => {
       'hidden': false,
       'burnAfterRead': false,
       'syntaxHighlight': 'null',
-    }
+    };
 
     await api
       .post('/api/all-media')
       .send(newMedia)
       .expect(201)
-      .expect('Content-Type', /application\/json/)
+      .expect('Content-Type', /application\/json/);
 
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    const titles = response.body.map(response => response.title)
+    const titles = response.body.map(response => response.title);
 
-    expect(response.body).toHaveLength(helper.initialMedia.length + 1)
+    expect(response.body).toHaveLength(helper.initialMedia.length + 1);
     expect(titles).toContain(
       'Untitled'
-    )
-  })
-})
+    );
+  });
+});
 
 describe('uploading a new file/image media', () => {
   test('succeeds with status code 201 when media is valid', async () => {
@@ -154,23 +154,23 @@ describe('uploading a new file/image media', () => {
       'title': 'A fresh new file',
       'hidden': false,
       'burnAfterRead': false,
-    }
+    };
 
     await api
       .post('/api/all-media')
       .send(newMedia)
       .expect(201)
-      .expect('Content-Type', /application\/json/)
+      .expect('Content-Type', /application\/json/);
 
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    const contents = response.body.map(response => response.content)
+    const contents = response.body.map(response => response.content);
 
-    expect(response.body).toHaveLength(helper.initialMedia.length + 1)
+    expect(response.body).toHaveLength(helper.initialMedia.length + 1);
     expect(contents).toContain(
       'https://mediabin-s3.s3.amazonaws.com/08607e44-1ba1-32a6-d33f-b1718665cff6'
-    )
-  })
+    );
+  });
 
   test('fails with status code 400 when media has no content', async () => {
     const newMedia = {
@@ -180,18 +180,18 @@ describe('uploading a new file/image media', () => {
       'title': 'Why can\'t I upload this?',
       'hidden': false,
       'burnAfterRead': false,
-    }
+    };
 
     await api
       .post('/api/all-media')
       .send(newMedia)
       .expect(400)
-      .expect('Content-Type', /application\/json/)
+      .expect('Content-Type', /application\/json/);
 
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    expect(response.body).toHaveLength(helper.initialMedia.length)
-  })
+    expect(response.body).toHaveLength(helper.initialMedia.length);
+  });
 
   test('fails with status code 400 when media size is too large', async () => {
     const newMedia = {
@@ -201,18 +201,18 @@ describe('uploading a new file/image media', () => {
       'title': 'Why can\'t I upload this?',
       'hidden': false,
       'burnAfterRead': false,
-    }
+    };
 
     await api
       .post('/api/all-media')
       .send(newMedia)
       .expect(400)
-      .expect('Content-Type', /application\/json/)
+      .expect('Content-Type', /application\/json/);
 
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    expect(response.body).toHaveLength(helper.initialMedia.length)
-  })
+    expect(response.body).toHaveLength(helper.initialMedia.length);
+  });
 
   test('title is set as Untitled if no title is given', async () => {
     const newMedia = {
@@ -222,27 +222,27 @@ describe('uploading a new file/image media', () => {
       'size': 2142,
       'hidden': false,
       'burnAfterRead': false,
-    }
+    };
 
     await api
       .post('/api/all-media')
       .send(newMedia)
       .expect(201)
-      .expect('Content-Type', /application\/json/)
+      .expect('Content-Type', /application\/json/);
 
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    const titles = response.body.map(response => response.title)
+    const titles = response.body.map(response => response.title);
 
-    expect(response.body).toHaveLength(helper.initialMedia.length + 1)
+    expect(response.body).toHaveLength(helper.initialMedia.length + 1);
     expect(titles).toContain(
       'Untitled'
-    )
-  })
-})
+    );
+  });
+});
 
 describe('hidden media', () => {
-  let savedMedia
+  let savedMedia;
   beforeEach(async () => {
     const hiddenMedia = new Media({
       'content': 'You can\'t see this in all media.',
@@ -252,32 +252,32 @@ describe('hidden media', () => {
       'hidden': true,
       'burnAfterRead': false,
       'syntaxHighlight': 'null',
-    })
+    });
 
-    savedMedia = await hiddenMedia.save()
-  })
+    savedMedia = await hiddenMedia.save();
+  });
 
   test('is not found in all media', async () => {
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    const contents = response.body.map(response => response.content)
+    const contents = response.body.map(response => response.content);
 
-    expect(response.body).toHaveLength(helper.initialMedia.length)
-    expect(contents).not.toContain('You can\'t see this in all media.')
-  })
+    expect(response.body).toHaveLength(helper.initialMedia.length);
+    expect(contents).not.toContain('You can\'t see this in all media.');
+  });
 
   test('is found with id', async () => {
     const response = await api.get(`/api/all-media/${savedMedia.id}`)
       .expect(200)
-      .expect('Content-Type', /application\/json/)
+      .expect('Content-Type', /application\/json/);
 
-    expect(response.body).toBeDefined()
-    expect(response.body.content).toContain('You can\'t see this in all media.')
-  })
-})
+    expect(response.body).toBeDefined();
+    expect(response.body.content).toContain('You can\'t see this in all media.');
+  });
+});
 
 describe('burn after read media', () => {
-  let savedMedia
+  let savedMedia;
   beforeEach(async () => {
     const hiddenMedia = new Media({
       'content': 'You can see this only once.',
@@ -287,31 +287,31 @@ describe('burn after read media', () => {
       'hidden': true,
       'burnAfterRead': true,
       'syntaxHighlight': 'null',
-    })
+    });
 
-    savedMedia = await hiddenMedia.save()
-  })
+    savedMedia = await hiddenMedia.save();
+  });
 
   test('is not found in all media', async () => {
-    const response = await api.get('/api/all-media')
+    const response = await api.get('/api/all-media');
 
-    const contents = response.body.map(response => response.content)
+    const contents = response.body.map(response => response.content);
 
-    expect(response.body).toHaveLength(helper.initialMedia.length)
-    expect(contents).not.toContain('You can see this only once.')
-  })
+    expect(response.body).toHaveLength(helper.initialMedia.length);
+    expect(contents).not.toContain('You can see this only once.');
+  });
 
   test('is found only once with id', async () => {
     const response = await api.get(`/api/all-media/${savedMedia.id}`)
       .expect(200)
-      .expect('Content-Type', /application\/json/)
+      .expect('Content-Type', /application\/json/);
 
-    expect(response.body).toBeDefined()
-    expect(response.body.content).toContain('You can see this only once.')
+    expect(response.body).toBeDefined();
+    expect(response.body.content).toContain('You can see this only once.');
 
     const secondResponse = await api.get(`/api/all-media/${savedMedia.id}`)
-      .expect(204)
+      .expect(204);
 
-    expect(secondResponse.body).toStrictEqual({})
-  })
-})
+    expect(secondResponse.body).toStrictEqual({});
+  });
+});

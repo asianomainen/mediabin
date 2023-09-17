@@ -26,7 +26,7 @@ module.exports = {
     ],
     'semi': [
       'error',
-      'never'
+      'always'
     ],
     'eqeqeq': 'error',
     'no-trailing-spaces': 'error',
@@ -41,4 +41,4 @@ module.exports = {
   'plugins': [
     'cypress'
   ]
-}
+};
